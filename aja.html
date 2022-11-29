@@ -11,17 +11,16 @@
     <h1>HOLA MUNDO</h1>
     <!-- <input type="date" name="fecha" id="fecha">
     <input type="time" name="hora" id="hora"> -->
-    <input type="text" id="fecha">
-    <input type="text" id="hora">
+    <input type="text" id="hora" disabled>
+    <input type="text" id="fecha" disabled>
+    
     <script>
         window.onload = ()=>{
             var today = new Date();
             var now = today.toLocaleString();
             fullDate = now.split(",");
-            document.getElementById("fecha").innerHTML = fullDate[0];
-            document.getElementById("hora").innerHTML = fullDate[1];
-            console.log(document.getElementById("fecha"));
-            console.log(document.getElementById("hora"));
+            document.getElementById("fecha").value = fullDate[0];
+            document.getElementById("hora").value = fullDate[1];
         }
         
     </script>
