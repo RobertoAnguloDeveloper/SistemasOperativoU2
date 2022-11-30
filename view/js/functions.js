@@ -7,6 +7,10 @@ const files = require("./reg/files.js");
 // ,{ time: '10:24:00', date:"1000-10-10"}
 // ,{ time: '10:52:00', date:"1000-10-10"}];
 
-function prueba(){
-  alert("TU MAE");
+function data(){
+  document.getElementById()
 }
+
+
+
+files.toJson(data);
