@@ -48,7 +48,14 @@ var ticket = 0;
 dataRoundRobin = [{}];
 
 function data2(){
-
+  var today = new Date();
+  var now = today.toLocaleString();
+  fullDate = now.split(",");
+  document.getElementById("fecha1").value = fullDate[0];
+  document.getElementById("hora1").value = fullDate[1];
+  document.getElementById("fecha2").value = fullDate[0];
+  document.getElementById("hora2").value = fullDate[1];
+  
   nombre2 = document.getElementById("nombre2").value;
   cc2 = document.getElementById("cc2").value;
   quantum = document.getElementById("quantum").value;
@@ -92,5 +99,5 @@ function putInTable(data){
 }
 
 function roundRobin(){
-  
+
 }
