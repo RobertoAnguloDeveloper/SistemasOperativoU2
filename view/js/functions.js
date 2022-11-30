@@ -47,6 +47,12 @@ var ticket1 = 0;
 
 fifo = [{}];
 
+function test(){
+  var test = document.getElementById("table1").querySelector("tbody").querySelector("tr");
+  console.log(test);
+  test.remove();
+}
+
 function data1(){
   var today1 = new Date();
   var now1 = today1.toLocaleString();
