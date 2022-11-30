@@ -2,12 +2,15 @@ var ticket = 0;
 const tiempoFifo = 3;
 
 class Persona{
-  constructor(nombre, cc, hora, fecha){
+  constructor(nombre, cc, duracion, hora, fecha){
     ticket++;
     this.ticket = ticket;
     this.nombre = nombre;
     this.tiempoLimite = tiempoFifo;
     this.cc = cc;
+    if(duracion != null){
+      this.duracion = duracion;
+    }
     this.hora = hora;
     this.fecha = fecha;
   }
@@ -77,10 +80,6 @@ class Banco{
 
   getTiempoLimite(){
     return this.tiempoLimite;
-  }
-
-  fifo(persona) {
-    console.log(this.tiempoLimite, persona);
   }
 }
 
