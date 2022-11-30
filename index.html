@@ -9,33 +9,75 @@
 </head>
 <body>
     <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
-    <h2>FIFO</h2>
-    <fieldset>
-        <input type="text" id="hora1" disabled>
-        <input type="text" id="fecha1" disabled>
-        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="prueba()">
-    </fieldset>
+
+   
+        <form id="miForm" onload="">
+            <fieldset>
+                <legend>FIFO</legend>
+                        <label for="nombre1">NOMBRE</label>
+                        <input type="text" id="nombre1">
+
+                        <label for="cc1">CC</label>
+                        <input type="number" id="cc1">
+
+                        <label for="hora1">Hora de llegada</label>
+                        <input type="text" id="hora1" disabled>
+
+                        <label for="fecha1">Fecha</label>
+                        <input type="text" id="fecha1" disabled>
+                        
+                        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="data1();">
+            </fieldset>
+        </form>
+
+
+    <table id="table1">
+        <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Nombre</th>
+                <th>CC</th>
+                <th>Hora de llegada</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+    </table>
+
+    <input type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="test();">
     
-    <h2>Round Robin</h2>
     <fieldset>
+        <legend>Round Robin</legend>
+        <label for="nombre2">NOMBRE</label>
+        <input type="text" id="nombre2">
+
+        <label for="cc2">CC</label>
+        <input type="number" id="cc2">
+
+        <label for="quantum">Tiempo en CPU (max 5s)</label>
+        <input type="number" id="quantum" min="1" max="5">
+
+        <label for="hora2">Hora de llegada</label>
         <input type="text" id="hora2" disabled>
+
+        <label for="fecha2">Fecha</label>
         <input type="text" id="fecha2" disabled>
-        <input type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="prueba()">
+
+        <input type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="data2();">
     </fieldset>
 
-    <input type="date" name="fecha" id="fecha">
-    <input type="time" name="hora" id="hora">
-    
-    <script>
-        window.onload = ()=>{
-            var today = new Date();
-            var now = today.toLocaleString();
-            fullDate = now.split(",");
-            document.getElementById("fecha1").value = fullDate[0];
-            document.getElementById("hora1").value = fullDate[1];
-            document.getElementById("fecha2").value = fullDate[0];
-            document.getElementById("hora2").value = fullDate[1];
-        }
-    </script>
+    <table id="table2">
+        <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Nombre</th>
+                <th>CC</th>
+                <th>Tiempo en CPU</th>
+                <th>Hora de llegada</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+    </table>
+
+    <input type="button" id="simulateRR" value="SIMULAR ROUND ROBIN">
 </body>
 </html>
