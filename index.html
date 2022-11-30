@@ -31,6 +31,7 @@
             <tr>
                 <th>Ticket</th>
                 <th>Nombre</th>
+                <th>CC</th>
                 <th>Hora de llegada</th>
                 <th>Fecha</th>
             </tr>
@@ -47,8 +48,8 @@
         <label for="cc2">CC</label>
         <input type="number" id="cc2">
 
-        <label for="quantum">Tiempo en CPU</label>
-        <input type="number" id="quantum">
+        <label for="quantum">Tiempo en CPU (max 5s)</label>
+        <input type="number" id="quantum" min="1" max="5">
 
         <label for="hora2">Hora de llegada</label>
         <input type="text" id="hora2" disabled>
@@ -64,6 +65,7 @@
             <tr>
                 <th>Ticket</th>
                 <th>Nombre</th>
+                <th>CC</th>
                 <th>Tiempo en CPU</th>
                 <th>Hora de llegada</th>
                 <th>Fecha</th>
@@ -71,6 +73,6 @@
         </thead>
     </table>
 
-    <input type="button" id="simulateFifo" value="SIMULAR FIFO">
+    <input type="button" id="simulateRR" value="SIMULAR ROUND ROBIN">
 </body>
 </html>
