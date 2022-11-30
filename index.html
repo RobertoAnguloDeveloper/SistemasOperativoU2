@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="view/js/functions.js"></script>
+    <title>SISTEMAS OPERATIVOS</title>
+</head>
+<body>
+    <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+    <h2>FIFO</h2>
+    <fieldset>
+        <input type="text" id="hora1" disabled>
+        <input type="text" id="fecha1" disabled>
+        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="prueba()">
+    </fieldset>
+    
+    <h2>Round Robin</h2>
+    <fieldset>
+        <input type="text" id="hora2" disabled>
+        <input type="text" id="fecha2" disabled>
+        <input type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="prueba()">
+    </fieldset>
+
+    <!-- <input type="date" name="fecha" id="fecha">
+    <input type="time" name="hora" id="hora"> -->
+    
+    <script>
+        window.onload = ()=>{
+            var today = new Date();
+            var now = today.toLocaleString();
+            fullDate = now.split(",");
+            document.getElementById("fecha1").value = fullDate[0];
+            document.getElementById("hora1").value = fullDate[1];
+            document.getElementById("fecha2").value = fullDate[0];
+            document.getElementById("hora2").value = fullDate[1];
+        }
+    </script>
+</body>
+</html>
