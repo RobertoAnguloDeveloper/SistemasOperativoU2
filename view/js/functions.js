@@ -45,6 +45,8 @@
 
 var ticket = 0;
 
+dataRoundRobin = [{}];
+
 function data2(){
 
   nombre2 = document.getElementById("nombre2").value;
@@ -55,15 +57,40 @@ function data2(){
 
   ticket++;
 
-  data = {
+  dataRoundRobin.push({
     ticket: ticket,
-    nombre: nombre2, 
-    cc: cc2, 
+    nombre: nombre2,
+    cc: cc2,
     quantum: quantum,
     hora: hora2,
     fecha: fecha2
-  };
+  });
 
-  console.log(data);
+  console.log(dataRoundRobin);
+  putInTable(dataRoundRobin);
+}
+
+function putInTable(data){
+  if (document.getElementById("table2").querySelector("tbody")) {
+    document.getElementById("table2").querySelector("tbody").remove();
+  }
+
+  for (var i = 1; i < data.length; i++) {
+    if (i == 1) {
+      tbody = document.createElement("tbody");
+      document.getElementById("table2").appendChild(tbody);
+    }
+
+    var td1 = document.createElement("td").innerHTML = '<td>' + data[i].ticket + '</td>';
+    var td2 = document.createElement("td").innerHTML = '<td>' + data[i].nombre + '</td>';
+    var td3 = document.createElement("td").innerHTML = '<td>' + data[i].cc + '</td>';
+    var td4 = document.createElement("td").innerHTML = '<td>' + data[i].quantum + '</td>';
+    var td5 = document.createElement("td").innerHTML = '<td>' + data[i].hora + '</td>';
+    var td6 = document.createElement("td").innerHTML = '<td>' + data[i].fecha + '</td>';
+    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6;
+  }
+}
+
+function roundRobin(){
   
 }
