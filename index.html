@@ -1,41 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="view/js/functions.js"></script>
+    <link rel="stylesheet" href="/view/css/style.css">
+    <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap-reboot.min.css">
     <title>SISTEMAS OPERATIVOS</title>
 </head>
-<body>
-    <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
-    <h2>FIFO</h2>
-    <fieldset>
-        <input type="text" id="hora1" disabled>
-        <input type="text" id="fecha1" disabled>
-        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="prueba()">
-    </fieldset>
-    
-    <h2>Round Robin</h2>
-    <fieldset>
-        <input type="text" id="hora2" disabled>
-        <input type="text" id="fecha2" disabled>
-        <input type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="prueba()">
-    </fieldset>
 
-    <!-- <input type="date" name="fecha" id="fecha">
-    <input type="time" name="hora" id="hora"> -->
+<body>
+    <section>
+        <center>
+            <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+            <div class="container-input">
+                <div class="form-tittle">
+                    <h2>FIFO</h2>
+                </div>
+                <div class="input-reg">
+                    <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre">
+                    <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula">
+                    <input class="input" type="text" id="hora1" disabled>
+                    <input class="input" type="text" id="fecha1" disabled>
+                    <input class="btn-enviar" type="button" id="btnCreateFifo" value="Crear proceso" onclick="data1();">
+                </div>
+            </div>
+        </center>
+    </section>
+
+    <section>
+        <center>
+            <div class="container-input_rr">
+                <div class="form-tittle">
+                    <h2>Round Robin</h2>
+                </div>
+                <div class="input-reg_rr">
+                    <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre">
+                    <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula">
+                    <input class="input" type="number" id="quantum" placeholder="Tiemp de CPU" min="1" max="5">
+                    <input class="input" type="text" id="hora2" disabled>
+                    <input class="input" type="text" id="fecha2" disabled>
+                    <input class="btn-enviar" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="data2();">
+                </div>
+            </div>
+
+        </center>
+    </section>
+
+    <br>
+    <hr>
+    <br>
+
+    <section class="container-table">
+        <center>
+            <h2>FIFO</h2>
+        </center>
+        <br>
+        <table class="table table-primary" id="table1">
+            <thead>
+                <tr>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Hora de Llegada</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
     
-    <script>
-        window.onload = ()=>{
-            var today = new Date();
-            var now = today.toLocaleString();
-            fullDate = now.split(",");
-            document.getElementById("fecha1").value = fullDate[0];
-            document.getElementById("hora1").value = fullDate[1];
-            document.getElementById("fecha2").value = fullDate[0];
-            document.getElementById("hora2").value = fullDate[1];
-        }
-    </script>
+    <center>
+        <input class="btn-fifo" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="test();">
+    </center>
+    
+
+    <br>
+    <hr>
+    <br>
+
+    <section class="container-table">
+
+        <center>
+            <h2>Round Robin</h2>
+        </center>
+        <br>
+        <table class="table table-primary" id="table1">
+            <thead>
+                <tr>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Tiemp de CPU</th>
+                    <th scope="col">Hora de Llegada</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+
+    <center>
+        <input class="btn-rr" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN">
+    </center>
+    
 </body>
+
 </html>
