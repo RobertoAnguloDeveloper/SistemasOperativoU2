@@ -9,20 +9,54 @@
 </head>
 <body>
     <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
-    <h2>FIFO</h2>
+
     <fieldset>
+        <legend>FIFO</legend>
+        <label for="nombre1">NOMBRE</label>
+        <input type="text" id="nombre1">
+
+        <label for="cc1">CC</label>
+        <input type="number" id="cc1">
+
+        <label for="hora1">Hora de llegada</label>
         <input type="text" id="hora1" disabled>
+
+        <label for="fecha1">Fecha</label>
         <input type="text" id="fecha1" disabled>
-        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="">
+        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="data1();">
     </fieldset>
+
+    <table id="table1">
+        <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Nombre</th>
+                <th>Hora de llegada</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
     
-    <h2>Round Robin</h2>
     <fieldset>
+        <legend>Round Robin</legend>
+        <label for="nombre2">NOMBRE</label>
         <input type="text" id="nombre2">
-        <input type="text" id="cc2">
+
+        <label for="cc2">CC</label>
+        <input type="number" id="cc2">
+
+        <label for="quantum">Tiempo en CPU</label>
         <input type="number" id="quantum">
+
+        <label for="hora2">Hora de llegada</label>
         <input type="text" id="hora2" disabled>
+
+        <label for="fecha2">Fecha</label>
         <input type="text" id="fecha2" disabled>
+
         <input type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="data2();">
     </fieldset>
 
