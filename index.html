@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="view/js/functions.js"></script>
+    <script src="view/js/classes.js"></script>
     <link rel="stylesheet" href="/view/css/style.css">
     <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap-grid.css">
@@ -14,98 +14,79 @@
 </head>
 
 <body>
-    <section>
-        <center>
-            <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
-            <div class="container-input">
-                <div class="form-tittle">
-                    <h2>FIFO</h2>
-                </div>
-                <div class="input-reg">
-                    <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre">
-                    <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula">
-                    <input class="input" type="text" id="hora1" disabled>
-                    <input class="input" type="text" id="fecha1" disabled>
-                    <input class="btn-enviar" type="button" id="btnCreateFifo" value="Crear proceso" onclick="data1();">
-                </div>
-            </div>
-        </center>
-    </section>
-
-    <section>
-        <center>
-            <div class="container-input_rr">
-                <div class="form-tittle">
-                    <h2>Round Robin</h2>
-                </div>
-                <div class="input-reg_rr">
-                    <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre">
-                    <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula">
-                    <input class="input" type="number" id="quantum" placeholder="Tiemp de CPU" min="1" max="5">
-                    <input class="input" type="text" id="hora2" disabled>
-                    <input class="input" type="text" id="fecha2" disabled>
-                    <input class="btn-enviar" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="data2();">
+    <h1 class="mx-auto" style="width: 900px;">SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+    <section class="container">
+        <div class="row">
+            <div class="col" style="margin-left: 50px; margin-right: unset">
+                <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
+                    <div class="form-tittle" style="padding-bottom: unset;">
+                        <h2 class="mx-auto">FIFO</h2>    
+                        <div class="input-reg" id="fifo">
+                            <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre" required>
+                            <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula" required>
+                            <input class="input" type="text" id="hora1" disabled>
+                            <input class="input" type="text" id="fecha1" disabled>
+                            <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateFifo" value="Crear proceso" onclick="persona1();">
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="col-sm mt-4">
+                <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-lg">
+                    <h2 class="mx-auto text-secondary" style="width: 100px;">FIFO</h2>
+                    <table class="table table-secondary table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ticket</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Hora de Llegada</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <input class="btn-fifo mx-auto mt-5" style="width: 150px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="persona2();">
+                </div>
+            </div>
+        </div>
 
-        </center>
+        <div class="row">
+            <div class="col" style="margin-left: 50px; margin-right: unset">
+                <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
+                    <div class="form-tittle" style="padding-bottom: unset;">
+                        <h2 class="mx-auto">Round Robin</h2>
+                    </div>
+                    <div class="input-reg_rr">
+                        <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre" required>
+                        <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula" required>
+                        <input class="input" type="number" id="quantum" placeholder="Tiemp de CPU" min="1" max="5" required>
+                        <input class="input" type="text" id="hora2" disabled>
+                        <input class="input" type="text" id="fecha2" disabled>
+                        <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm mt-4">
+                <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-lg">
+                    <h2 class="mx-auto text-secondary" style="width: 180px;">Round Robin</h2>
+                    <table class="table table-secondary table-striped" id="table2">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ticket</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Tiemp de CPU</th>
+                                <th scope="col">Hora de Llegada</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <input class="btn-fifo mx-auto mt-5" style="width: 200px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <br>
-    <hr>
-    <br>
-
-    <section class="container-table">
-        <center>
-            <h2>FIFO</h2>
-        </center>
-        <br>
-        <table class="table table-primary" id="table1">
-            <thead>
-                <tr>
-                    <th scope="col">Ticket</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cedula</th>
-                    <th scope="col">Hora de Llegada</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-        </table>
-    </section>
-    
-    <center>
-        <input class="btn-fifo" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="test();">
-    </center>
-    
-
-    <br>
-    <hr>
-    <br>
-
-    <section class="container-table">
-
-        <center>
-            <h2>Round Robin</h2>
-        </center>
-        <br>
-        <table class="table table-primary" id="table1">
-            <thead>
-                <tr>
-                    <th scope="col">Ticket</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cedula</th>
-                    <th scope="col">Tiemp de CPU</th>
-                    <th scope="col">Hora de Llegada</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-        </table>
-    </section>
-
-    <center>
-        <input class="btn-rr" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN">
-    </center>
-    
 </body>
-
 </html>

@@ -1,18 +1,27 @@
 var ticket = 0;
+var ticketRR = 0;
 const tiempoFifo = 3;
 
 class Persona{
   constructor(nombre, cc, duracion, hora, fecha){
-    ticket++;
+    if(duracion != null){
+      ticketRR++;
+      this.ticketRR = ticketRR;
+      this.nombre = nombre;
+      this.tiempoLimite = tiempoFifo;
+      this.cc = cc;
+      this.duracion = duracion;
+      this.hora = hora;
+      this.fecha = fecha;
+    }else{
+      ticket++;
     this.ticket = ticket;
     this.nombre = nombre;
     this.tiempoLimite = tiempoFifo;
     this.cc = cc;
-    if(duracion != null){
-      this.duracion = duracion;
-    }
     this.hora = hora;
     this.fecha = fecha;
+    }
   }
 
   // constructor(nombre, cc, duracion, hora, fecha){
@@ -81,25 +90,106 @@ class Banco{
   getTiempoLimite(){
     return this.tiempoLimite;
   }
+
 }
 
-function test(){
-  var today1 = new Date();
-  var now1 = today1.toLocaleString();
-  fullDate1 = now1.split(",");
-  document.getElementById("fecha1").value = fullDate1[0];
-  document.getElementById("hora1").value = fullDate1[1];
+fifo = [{}];
 
-  nombre1 = document.getElementById("nombre1").value;
-  cc1 = document.getElementById("cc1").value;
-  hora1 = document.getElementById("hora1").value;
-  fecha1 = document.getElementById("fecha1").value;
+function persona1(){
+  let today = new Date();
+  let now = today.toLocaleString();
+  let fullDate = now.split(",");
+  
+  document.getElementById("fecha1").value = fullDate[0];
+  document.getElementById("hora1").value = fullDate[1];
 
-  const p1 = new Persona(nombre1, cc1, hora1, fecha1);
-  const banco = new Banco(5);
+  let nombre = document.getElementById("nombre1").value;
+  let cc = document.getElementById("cc1").value;
+  let hora = document.getElementById("hora1").value;
+  let fecha = document.getElementById("fecha1").value;
+  
+  const p1 = new Persona(nombre, cc, null, hora, fecha);
 
-  banco.fifo(p1);
+  fifo.push({
+    ticket: p1.ticket,
+    nombre: p1.nombre,
+    cc: p1.cc,
+    duracion: p1.duracion,
+    hora: p1.hora,
+    fecha: p1.fecha
+  });
+
+  console.log(fifo);
+
+  if (document.getElementById("table1").querySelector("tbody")) {
+    document.getElementById("table1").querySelector("tbody").remove();
+  }
+
+  let tbody = document.createElement("tbody");
+
+  for (let i = 1; i < fifo.length; i++) {
+    if (i == 1) {
+      
+      document.getElementById("table1").appendChild(tbody);
+    }
+
+    let td1 = document.createElement("td").innerHTML = '<td>' + fifo[i].ticket + '</td>';
+    let td2 = document.createElement("td").innerHTML = '<td>' + fifo[i].nombre + '</td>';
+    let td3 = document.createElement("td").innerHTML = '<td>' + fifo[i].cc + '</td>';
+    let td4 = document.createElement("td").innerHTML = '<td>' + fifo[i].hora + '</td>';
+    let td5 = document.createElement("td").innerHTML = '<td>' + fifo[i].fecha + '</td>';
+
+    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5; 
+  }
 }
 
+dataRoundRobin = [{}];
 
+function persona2(){
+  let today = new Date();
+  let now = today.toLocaleString();
+  let fullDate = now.split(",");
+  
+  document.getElementById("fecha2").value = fullDate[0];
+  document.getElementById("hora2").value = fullDate[1];
 
+  let nombre = document.getElementById("nombre2").value;
+  let cc = document.getElementById("cc2").value;
+  let quantum = document.getElementById("quantum").value;
+  let hora = document.getElementById("hora2").value;
+  let fecha = document.getElementById("fecha2").value;
+
+  const p2 = new Persona(nombre, cc, quantum, hora, fecha);
+
+  dataRoundRobin.push({
+    ticketRR: p2.ticketRR,
+    nombre: p2.nombre,
+    cc: p2.cc,
+    duracion: p2.duracion,
+    hora: p2.hora,
+    fecha: p2.fecha
+  });
+
+  console.log(dataRoundRobin);
+
+  if (document.getElementById("table2").querySelector("tbody")) {
+    document.getElementById("table2").querySelector("tbody").remove();
+  }
+
+  let tbody = document.createElement("tbody");
+  
+  for (let i = 1; i < dataRoundRobin.length; i++) {
+    if (i == 1) {
+      document.getElementById("table2").appendChild(tbody);
+    }
+
+    let td1 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].ticketRR + '</td>';
+    let td2 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].nombre + '</td>';
+    let td3 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].cc + '</td>';
+    let td4 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].duracion + '</td>';
+    let td5 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].hora + '</td>';
+    let td6 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].fecha + '</td>';
+
+    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6; 
+  }
+}
