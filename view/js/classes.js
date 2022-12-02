@@ -109,6 +109,8 @@ function simulateFifo(){
     fifo.shift();
   }
 
+  //Try with While loop
+
   // for (let i = 0; i < rows.length-1; i++) {
   //   let element = document.getElementById('enCaja'+i);
   //   element.innerHTML = "****";
@@ -182,11 +184,16 @@ roundRobin.shift();
 function simulateRR(){
   let rows = document.getElementById("table2").getElementsByTagName("tr");
   // 
-  // console.log(rr.length);
+  // console.log(roundRobin.length);
   // console.log("Click")
   if (rows.length > 1){
-    rows[1].remove();
-    roundRobin.shift();
+    if(roundRobin[0].duracion <= roundRobin[0].cpuLimit){
+      rows[1].remove();
+      roundRobin.shift();
+    }else{
+      let aux = rows[rows.length-1]
+      rows[rows.length-1] = rows[1];
+    }
   }
 }
 
