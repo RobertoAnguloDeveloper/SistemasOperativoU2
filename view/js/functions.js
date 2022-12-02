@@ -50,6 +50,7 @@ fifo = [{}];
 function test(){
   var test = document.getElementById("table1").querySelector("tbody").querySelector("tr");
   console.log(test);
+  
   test.remove();
 }
 

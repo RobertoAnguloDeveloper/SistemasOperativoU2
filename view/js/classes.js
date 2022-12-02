@@ -15,12 +15,12 @@ class Persona{
       this.fecha = fecha;
     }else{
       ticket++;
-    this.ticket = ticket;
-    this.nombre = nombre;
-    this.tiempoLimite = tiempoFifo;
-    this.cc = cc;
-    this.hora = hora;
-    this.fecha = fecha;
+      this.ticket = ticket;
+      this.nombre = nombre;
+      this.tiempoLimite = tiempoFifo;
+      this.cc = cc;
+      this.hora = hora;
+      this.fecha = fecha;
     }
   }
 
@@ -93,20 +93,23 @@ class Banco{
 
 }
 
+function limpiarCampos(campos){
+  for(let i=0;i<campos.length;i++){
+    campos[i].value = "";
+  }
+}
+
 fifo = [{}];
 
 function persona1(){
   let today = new Date();
   let now = today.toLocaleString();
   let fullDate = now.split(",");
-  
-  document.getElementById("fecha1").value = fullDate[0];
-  document.getElementById("hora1").value = fullDate[1];
 
   let nombre = document.getElementById("nombre1").value;
   let cc = document.getElementById("cc1").value;
-  let hora = document.getElementById("hora1").value;
-  let fecha = document.getElementById("fecha1").value;
+  let hora = fullDate[1];
+  let fecha = fullDate[0];
   
   const p1 = new Persona(nombre, cc, null, hora, fecha);
 
@@ -141,6 +144,13 @@ function persona1(){
 
     tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5; 
   }
+
+  let campos = [
+    document.getElementById("nombre1"),
+    document.getElementById("cc1"),
+  ]
+
+  limpiarCampos(campos);
 }
 
 dataRoundRobin = [{}];
@@ -149,15 +159,12 @@ function persona2(){
   let today = new Date();
   let now = today.toLocaleString();
   let fullDate = now.split(",");
-  
-  document.getElementById("fecha2").value = fullDate[0];
-  document.getElementById("hora2").value = fullDate[1];
 
   let nombre = document.getElementById("nombre2").value;
   let cc = document.getElementById("cc2").value;
   let quantum = document.getElementById("quantum").value;
-  let hora = document.getElementById("hora2").value;
-  let fecha = document.getElementById("fecha2").value;
+  let hora = fullDate[1];
+  let fecha = fullDate[0];
 
   const p2 = new Persona(nombre, cc, quantum, hora, fecha);
 
@@ -192,4 +199,12 @@ function persona2(){
 
     tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6; 
   }
+
+  let campos = [
+    document.getElementById("nombre2"),
+    document.getElementById("cc2"),
+    document.getElementById("quantum"),
+  ]
+
+  limpiarCampos(campos);
 }
