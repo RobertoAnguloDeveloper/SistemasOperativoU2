@@ -93,6 +93,14 @@ class Banco{
 
 }
 
+function simulateFifo(){
+  let rows = document.getElementById("table1").getElementsByTagName("tr");
+  if (rows.length > 1){
+    rows[1].remove()
+    fifo.shift();
+  }
+}
+
 function limpiarCampos(campos){
   for(let i=0;i<campos.length;i++){
     campos[i].value = "";
@@ -100,6 +108,8 @@ function limpiarCampos(campos){
 }
 
 fifo = [{}];
+
+fifo.shift();
 
 function persona1(){
   let today = new Date();
@@ -111,6 +121,10 @@ function persona1(){
   let hora = fullDate[1];
   let fecha = fullDate[0];
   
+  if(fifo.length == 0){
+    ticket = 0;
+  }
+
   const p1 = new Persona(nombre, cc, null, hora, fecha);
 
   fifo.push({
@@ -122,17 +136,14 @@ function persona1(){
     fecha: p1.fecha
   });
 
-  console.log(fifo);
-
   if (document.getElementById("table1").querySelector("tbody")) {
     document.getElementById("table1").querySelector("tbody").remove();
   }
 
   let tbody = document.createElement("tbody");
 
-  for (let i = 1; i < fifo.length; i++) {
-    if (i == 1) {
-      
+  for (let i = 0; i < fifo.length; i++) {
+    if (i == 0) {
       document.getElementById("table1").appendChild(tbody);
     }
 
@@ -153,7 +164,8 @@ function persona1(){
   limpiarCampos(campos);
 }
 
-dataRoundRobin = [{}];
+roundRobin = [{}];
+roundRobin.shift();
 
 function persona2(){
   let today = new Date();
@@ -166,9 +178,13 @@ function persona2(){
   let hora = fullDate[1];
   let fecha = fullDate[0];
 
+  if(roundRobin.length == 0){
+    ticketRR = 0;
+  }
+
   const p2 = new Persona(nombre, cc, quantum, hora, fecha);
 
-  dataRoundRobin.push({
+  roundRobin.push({
     ticketRR: p2.ticketRR,
     nombre: p2.nombre,
     cc: p2.cc,
@@ -177,7 +193,7 @@ function persona2(){
     fecha: p2.fecha
   });
 
-  console.log(dataRoundRobin);
+  console.log(roundRobin);
 
   if (document.getElementById("table2").querySelector("tbody")) {
     document.getElementById("table2").querySelector("tbody").remove();
@@ -185,17 +201,17 @@ function persona2(){
 
   let tbody = document.createElement("tbody");
   
-  for (let i = 1; i < dataRoundRobin.length; i++) {
-    if (i == 1) {
+  for (let i = 0; i < roundRobin.length; i++) {
+    if (i == 0) {
       document.getElementById("table2").appendChild(tbody);
     }
 
-    let td1 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].ticketRR + '</td>';
-    let td2 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].nombre + '</td>';
-    let td3 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].cc + '</td>';
-    let td4 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].duracion + '</td>';
-    let td5 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].hora + '</td>';
-    let td6 = document.createElement("td").innerHTML = '<td>' + dataRoundRobin[i].fecha + '</td>';
+    let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].ticketRR + '</td>';
+    let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].nombre + '</td>';
+    let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cc + '</td>';
+    let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].duracion + '</td>';
+    let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
+    let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
 
     tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6; 
   }
