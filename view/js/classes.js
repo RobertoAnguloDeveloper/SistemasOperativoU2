@@ -93,6 +93,12 @@ class Banco{
 
 }
 
+function limpiarCampos(campos){
+  for(let i=0;i<campos.length;i++){
+    campos[i].value = "";
+  }
+}
+
 function simulateFifo(){
   let rows = document.getElementById("table1").getElementsByTagName("tr");
   // 
@@ -111,12 +117,6 @@ function simulateFifo(){
   //     fifo.shift();
   //   }, 1000);
   // }
-}
-
-function limpiarCampos(campos){
-  for(let i=0;i<campos.length;i++){
-    campos[i].value = "";
-  }
 }
 
 fifo = [{}];
@@ -179,6 +179,17 @@ function persona1(){
 roundRobin = [{}];
 roundRobin.shift();
 
+function simulateRR(){
+  let rows = document.getElementById("table2").getElementsByTagName("tr");
+  // 
+  // console.log(rr.length);
+  // console.log("Click")
+  if (rows.length > 1){
+    rows[1].remove();
+    roundRobin.shift();
+  }
+}
+
 function persona2(){
   let today = new Date();
   let now = today.toLocaleString();
@@ -187,6 +198,7 @@ function persona2(){
   let nombre = document.getElementById("nombre2").value;
   let cc = document.getElementById("cc2").value;
   let quantum = document.getElementById("quantum").value;
+  let cpuLimit = document.getElementById("cpuLimit").value;
   let hora = fullDate[1];
   let fecha = fullDate[0];
 
@@ -201,6 +213,7 @@ function persona2(){
     nombre: p2.nombre,
     cc: p2.cc,
     duracion: p2.duracion,
+    cpuLimit: cpuLimit,
     hora: p2.hora,
     fecha: p2.fecha
   });
@@ -220,17 +233,19 @@ function persona2(){
     let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].nombre + '</td>';
     let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cc + '</td>';
     let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].duracion + '</td>';
-    let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
-    let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
+    let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cpuLimit + '</td>';
+    let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
+    let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
 
-    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6; 
+    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7; 
   }
 
   let campos = [
     document.getElementById("nombre2"),
     document.getElementById("cc2"),
     document.getElementById("quantum"),
-  ]
+    document.getElementById("cpuLimit")
+  ];
 
   limpiarCampos(campos);
 }
