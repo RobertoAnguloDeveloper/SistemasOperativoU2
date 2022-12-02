@@ -95,10 +95,22 @@ class Banco{
 
 function simulateFifo(){
   let rows = document.getElementById("table1").getElementsByTagName("tr");
+  // 
+  // console.log(fifo.length);
+  // console.log("Click")
   if (rows.length > 1){
     rows[1].remove()
     fifo.shift();
   }
+
+  // for (let i = 0; i < rows.length-1; i++) {
+  //   let element = document.getElementById('enCaja'+i);
+  //   element.innerHTML = "****";
+  //   setTimeout(() => {
+  //     rows[i].remove();
+  //     fifo.shift();
+  //   }, 1000);
+  // }
 }
 
 function limpiarCampos(campos){
@@ -146,14 +158,14 @@ function persona1(){
     if (i == 0) {
       document.getElementById("table1").appendChild(tbody);
     }
-
+    let enCaja = document.createElement("td").innerHTML = '<td id="enCaja'+i+'"></td>';
     let td1 = document.createElement("td").innerHTML = '<td>' + fifo[i].ticket + '</td>';
     let td2 = document.createElement("td").innerHTML = '<td>' + fifo[i].nombre + '</td>';
     let td3 = document.createElement("td").innerHTML = '<td>' + fifo[i].cc + '</td>';
     let td4 = document.createElement("td").innerHTML = '<td>' + fifo[i].hora + '</td>';
     let td5 = document.createElement("td").innerHTML = '<td>' + fifo[i].fecha + '</td>';
 
-    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5; 
+    tbody.insertRow(-1).innerHTML = enCaja+td1+td2+td3+td4+td5; 
   }
 
   let campos = [
@@ -192,8 +204,6 @@ function persona2(){
     hora: p2.hora,
     fecha: p2.fecha
   });
-
-  console.log(roundRobin);
 
   if (document.getElementById("table2").querySelector("tbody")) {
     document.getElementById("table2").querySelector("tbody").remove();
