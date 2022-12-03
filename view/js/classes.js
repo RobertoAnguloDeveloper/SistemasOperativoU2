@@ -100,25 +100,32 @@ function limpiarCampos(campos){
 }
 
 function simulateFifo(){
+  let element = document.getElementById('enCaja0');
   let rows = document.getElementById("table1").getElementsByTagName("tr");
-  // 
-  // console.log(fifo.length);
-  // console.log("Click")
-  if (rows.length > 1){
-    rows[1].remove()
-    fifo.shift();
-  }
+  let i = 0;
 
-  //Try with While loop
+  var interval = setInterval(()=>{
+    const promise = new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        if(i < rows.length-1){
+          console.log("ENTRO => "+i);
+          document.getElementById('enCaja'+i).innerHTML = "****";
+          resolve();
+        }
+      }, 1000);
+    });
 
-  // for (let i = 0; i < rows.length-1; i++) {
-  //   let element = document.getElementById('enCaja'+i);
-  //   element.innerHTML = "****";
-  //   setTimeout(() => {
-  //     rows[i].remove();
-  //     fifo.shift();
-  //   }, 1000);
-  // }
+    promise.then(res=>{
+      if (rows.length > 1){
+        i++;
+        rows[1].remove()
+        fifo.shift();
+      }else{
+        clearInterval(interval);
+        reject();
+      }
+    })
+  }, 2000);
 }
 
 fifo = [{}];
@@ -265,5 +272,4 @@ function fijarCambiar(){
     cpuLimit.style = "width: 150px; background-color: none;";
     cpuLimit.disabled = false;
   }
-  // console.log(cpuLimit);
 }
