@@ -250,9 +250,20 @@ function persona2(){
   let campos = [
     document.getElementById("nombre2"),
     document.getElementById("cc2"),
-    document.getElementById("quantum"),
-    document.getElementById("cpuLimit")
+    document.getElementById("quantum")
   ];
 
   limpiarCampos(campos);
+}
+
+function fijarCambiar(){
+  let cpuLimit = document.getElementById("cpuLimit");
+  if(!cpuLimit.disabled){
+    cpuLimit.disabled = true;
+    cpuLimit.style = "width: 150px; background-color: #ACD9DD;";
+  }else{
+    cpuLimit.style = "width: 150px; background-color: none;";
+    cpuLimit.disabled = false;
+  }
+  // console.log(cpuLimit);
 }
