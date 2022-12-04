@@ -1,83 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="view/js/functions.js"></script>
+    <script src="view/js/classes.js"></script>
+    <link rel="stylesheet" href="/view/css/style.css">
+    <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap-reboot.min.css">
     <title>SISTEMAS OPERATIVOS</title>
 </head>
+
 <body>
-    <h1>SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+    <h1 class="mx-auto" style="width: 900px;margin-top: -1%;">SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+    <section class="container" style="margin-top: -3%;">
+        <div class="row" style="margin-bottom: -5%;">
+            <div class="col" style="margin-left: 50px; margin-right: unset">
+                <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
+                    <div class="form-tittle" style="padding-bottom: unset;">
+                        <h2 class="mx-auto">FIFO</h2>    
+                        <div class="input-reg" id="fifo">
+                            <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre" required>
+                            <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula" required>
+                            <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateFifo" value="Crear proceso" onclick="persona1();">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm mt-3">
+                <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-bottom">
+                    <h2 class="mx-auto text-secondary" style="width: 100px;">FIFO</h2>
+                    <table class="table table-secondary table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th scope="col">En caja</th>
+                                <th scope="col">Ticket</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Hora de Llegada</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <input class="btn-fifo mx-auto mt-5" style="width: 150px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="simulateFifo();">
+                </div>
+            </div>
+        </div>
 
-   
-        <form id="miForm" onload="">
-            <fieldset>
-                <legend>FIFO</legend>
-                        <label for="nombre1">NOMBRE</label>
-                        <input type="text" id="nombre1">
+        <div class="row">
+            <div class="col" style="margin-left: 50px; margin-right: unset">
+                <div class="container-input_rr" style="width: 300px;padding-bottom: 0%;">
+                    <div class="form-tittle" style="padding-bottom: unset;">
+                        <h2 class="mx-auto">Round Robin</h2>
+                        <div class="input-reg_rr">
+                            <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre" required>
+                            <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula" required>
+                            <input class="input" type="number" id="quantum" placeholder="Tiempo con CPU(s)" min="1" max="5" required>
+                            <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        <label for="cc1">CC</label>
-                        <input type="number" id="cc1">
+            <div class="col" style="margin-top: 5%;margin-left: -30%;">
+                
+            </div>
 
-                        <label for="hora1">Hora de llegada</label>
-                        <input type="text" id="hora1" disabled>
-
-                        <label for="fecha1">Fecha</label>
-                        <input type="text" id="fecha1" disabled>
-                        
-                        <input type="button" id="btnCreateFifo" value="Crear proceso" onclick="data1();">
-            </fieldset>
-        </form>
-
-
-    <table id="table1">
-        <thead>
-            <tr>
-                <th>Ticket</th>
-                <th>Nombre</th>
-                <th>CC</th>
-                <th>Hora de llegada</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-    </table>
-
-    <input type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="test();">
-    
-    <fieldset>
-        <legend>Round Robin</legend>
-        <label for="nombre2">NOMBRE</label>
-        <input type="text" id="nombre2">
-
-        <label for="cc2">CC</label>
-        <input type="number" id="cc2">
-
-        <label for="quantum">Tiempo en CPU (max 5s)</label>
-        <input type="number" id="quantum" min="1" max="5">
-
-        <label for="hora2">Hora de llegada</label>
-        <input type="text" id="hora2" disabled>
-
-        <label for="fecha2">Fecha</label>
-        <input type="text" id="fecha2" disabled>
-
-        <input type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="data2();">
-    </fieldset>
-
-    <table id="table2">
-        <thead>
-            <tr>
-                <th>Ticket</th>
-                <th>Nombre</th>
-                <th>CC</th>
-                <th>Tiempo en CPU</th>
-                <th>Hora de llegada</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-    </table>
-
-    <input type="button" id="simulateRR" value="SIMULAR ROUND ROBIN">
+            <div class="col-sm mt-3" style="margin-left: -45%;">
+                <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-lg">
+                    <h2 class="text-secondary " style="width: 180px;">Round Robin</h2>
+                    <div style="margin-left:56.5%; margin-top: -12%;">
+                        <input class="btn-fifo mx-auto mt-5" style="width: 150px;" type="button" id="fijarLimite" value="Fijar/Cambiar límite" onclick="fijarCambiar();">
+                        <input class="input" style="width: 150px;" type="number" id="cpuLimit" placeholder="Limite CPU(s)" min="1" max="5">
+                    </div>
+                    <table class="table table-secondary table-striped" id="table2">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ticket</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Tiempo con CPU(s)</th>
+                                <th scope="col">Limite CPU(s)</th>
+                                <th scope="col">Hora de Llegada</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <input class="btn-fifo mx-auto mt-5" style="width: 200px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="">
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
