@@ -105,26 +105,29 @@ function simulateFifo(){
   let i = 0;
 
   var interval = setInterval(()=>{
-    const promise = new Promise((resolve, reject)=>{
+    const promise = new Promise((resolve)=>{
+      console.log("ENTRO => "+i);
       setTimeout(()=>{
         if(i < rows.length-1){
-          console.log("ENTRO => "+i);
-          document.getElementById('enCaja'+i).innerHTML = "****";
-          resolve();
+          setTimeout(()=>{
+            document.getElementById('enCaja'+i).innerHTML = "****";
+          }, 1000);
         }
+        resolve();
       }, 1000);
     });
 
     promise.then(res=>{
+      
       if (rows.length > 1){
-        i++;
         rows[1].remove()
         fifo.shift();
       }else{
         clearInterval(interval);
-        reject();
       }
-    })
+      i++;
+    });
+    
   }, 2000);
 }
 
