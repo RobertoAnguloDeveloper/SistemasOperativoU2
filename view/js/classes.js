@@ -106,11 +106,14 @@ function simulateFifo(){
 
   var interval = setInterval(()=>{
     const promise = new Promise((resolve)=>{
-      console.log("ENTRO => "+i);
+      if(i <= rows.length+1){
+        document.getElementById('enCaja'+i).innerHTML = "****";
+      }
+      
       setTimeout(()=>{
-        if(i < rows.length-1){
+        if(i < rows.length){
+          resolve();
           setTimeout(()=>{
-            document.getElementById('enCaja'+i).innerHTML = "****";
           }, 1000);
         }
         resolve();
@@ -118,7 +121,6 @@ function simulateFifo(){
     });
 
     promise.then(res=>{
-      
       if (rows.length > 1){
         rows[1].remove()
         fifo.shift();
