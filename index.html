@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <h1 class="mx-auto" style="width: 900px;">SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
-    <section class="container" style="margin-top: -2%;">
-        <div class="row" style="margin-bottom: -4%;">
+    <h1 class="mx-auto" style="width: 900px;margin-top: -1%;">SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+    <section class="container" style="margin-top: -3%;">
+        <div class="row" style="margin-bottom: -5%;">
             <div class="col" style="margin-left: 50px; margin-right: unset">
                 <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
                     <div class="form-tittle" style="padding-bottom: unset;">
@@ -29,12 +29,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm mt-4">
+            <div class="col-sm mt-3">
                 <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-bottom">
                     <h2 class="mx-auto text-secondary" style="width: 100px;">FIFO</h2>
                     <table class="table table-secondary table-striped" id="table1">
                         <thead>
                             <tr>
+                                <th scope="col">En caja</th>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Cedula</th>
@@ -43,36 +44,45 @@
                             </tr>
                         </thead>
                     </table>
-                    <input class="btn-fifo mx-auto mt-5" style="width: 150px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="persona2();">
+                    <input class="btn-fifo mx-auto mt-5" style="width: 150px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="simulateFifo();">
                 </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col" style="margin-left: 50px; margin-right: unset">
-                <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
+                <div class="container-input_rr" style="width: 300px;padding-bottom: 0%;">
                     <div class="form-tittle" style="padding-bottom: unset;">
                         <h2 class="mx-auto">Round Robin</h2>
-                    </div>
-                    <div class="input-reg_rr">
-                        <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre" required>
-                        <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula" required>
-                        <input class="input" type="number" id="quantum" placeholder="Tiemp de CPU" min="1" max="5" required>
-                        <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
+                        <div class="input-reg_rr">
+                            <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre" required>
+                            <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula" required>
+                            <input class="input" type="number" id="quantum" placeholder="Tiempo con CPU(s)" min="1" max="5" required>
+                            <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm mt-4">
+            <div class="col" style="margin-top: 5%;margin-left: -30%;">
+                
+            </div>
+
+            <div class="col-sm mt-3" style="margin-left: -45%;">
                 <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-lg">
-                    <h2 class="mx-auto text-secondary" style="width: 180px;">Round Robin</h2>
+                    <h2 class="text-secondary " style="width: 180px;">Round Robin</h2>
+                    <div style="margin-left:56.5%; margin-top: -12%;">
+                        <input class="btn-fifo mx-auto mt-5" style="width: 150px;" type="button" id="fijarLimite" value="Fijar/Cambiar límite" onclick="fijarCambiar();">
+                        <input class="input" style="width: 150px;" type="number" id="cpuLimit" placeholder="Limite CPU(s)" min="1" max="5">
+                    </div>
                     <table class="table table-secondary table-striped" id="table2">
                         <thead>
                             <tr>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Cedula</th>
-                                <th scope="col">Tiemp de CPU</th>
+                                <th scope="col">Tiempo con CPU(s)</th>
+                                <th scope="col">Limite CPU(s)</th>
                                 <th scope="col">Hora de Llegada</th>
                                 <th scope="col">Fecha</th>
                             </tr>
@@ -83,6 +93,5 @@
             </div>
         </div>
     </section>
-
 </body>
 </html>
