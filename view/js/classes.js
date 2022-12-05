@@ -106,20 +106,13 @@ function simulateFifo(){
 
   var interval = setInterval(()=>{
     const promise = new Promise((resolve)=>{
-      // console.log("[i]=>"+i+" rows.length=>"+ rows.length);
-      // if(i < initialSize){
-      //   //document.getElementById('enCaja'+i).innerHTML = "****";
-        
-      // }
-
       setTimeout(()=>{
         if(i < rows.length){
           resolve();
-          setTimeout(()=>{
-          }, 1000);
+          
         }
         resolve();
-      }, 1000);
+      }, 500);
     });
 
     promise.then(res=>{
@@ -134,9 +127,34 @@ function simulateFifo(){
         let td5 = document.createElement("td").innerHTML = '<td>' + fifo[0].fecha + '</td>';
 
         tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5;
+        
         rows[1].remove()
         fifo.shift();
         i++;
+
+        var interval2 = setInterval(()=>{
+          let promise2 = new Promise((resolve)=>{
+            setTimeout(()=>{
+              resolve();
+            }, 1000);
+          });
+
+          promise2.then(res=>{
+            rows2 = document.getElementById("tableCPU").getElementsByTagName("tr");
+
+            if(rows.length > 1) {
+              let tbody2 = document.createElement("tbody");
+              document.getElementById("tableTerminado").appendChild(tbody2);
+
+              let tdx = document.createElement("td").innerHTML = rows2[1].innerHTML;
+
+              tbody2.insertRow(-1).innerHTML = tdx;
+              rows2[1].remove();
+              clearInterval(interval2);
+            }
+          });
+        },1000);
+
       }else{
         let tbody = document.createElement("tbody");
         document.getElementById("tableCPU").appendChild(tbody);
@@ -148,48 +166,27 @@ function simulateFifo(){
         let td5 = document.createElement("td").innerHTML = '<td>' + fifo[0].fecha + '</td>';
 
         tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5;
+
         rows[1].remove()
         fifo.shift();
 
-        rows = document.getElementById("tableCPU").getElementsByTagName("tr");
-
-        i = 0;
-        initialSize = rows.length-1;
-
-        var interval2 = setInterval(()=>{
-          const promise2 = new Promise((resolve)=>{
+        var interval3 = setInterval(()=>{
+          let promise2 = new Promise((resolve)=>{
             setTimeout(()=>{
-              if(i < rows.length){
-                resolve();
-                setTimeout(()=>{
-                }, 1000);
-              }
               resolve();
             }, 1000);
-
-
           });
 
           promise2.then(res=>{
-            if (i < initialSize-1){
-              tbody = document.createElement("tbody");
-              document.getElementById("tableTerminado").appendChild(tbody);
+            rows2 = document.getElementById("tableCPU").getElementsByTagName("tr");
+            let tbody2 = document.createElement("tbody");
+            document.getElementById("tableTerminado").appendChild(tbody2);
 
-              td1 = document.createElement("td").innerHTML = rows[1].innerHTML;
+            let tdx = document.createElement("td").innerHTML = rows2[1].innerHTML;
 
-              tbody.insertRow(-1).innerHTML = td1;
-              rows[1].remove()
-              i++;
-            }else{
-              tbody = document.createElement("tbody");
-              document.getElementById("tableTerminado").appendChild(tbody);
-
-              td1 = document.createElement("td").innerHTML = rows[1].innerHTML;
-
-              tbody.insertRow(-1).innerHTML = td1;
-              rows[1].remove();
-              clearInterval(interval2);
-            }
+            tbody2.insertRow(-1).innerHTML = tdx;
+            rows2[1].remove();
+            clearInterval(interval3);
           });
         },2000);
 
