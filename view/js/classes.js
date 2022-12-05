@@ -23,74 +23,6 @@ class Persona{
       this.fecha = fecha;
     }
   }
-
-  // constructor(nombre, cc, duracion, hora, fecha){
-  //   this.ticket++;
-  //   this.nombre = nombre;
-  //   this.cc = cc;
-  //   this.duracion = duracion;
-  //   this.hora = hora;
-  //   this.fecha = fecha;
-  // }
-
-  getTicket(){
-    return this.ticket;
-  }
-
-  setTicket(ticket){
-    this.ticket = ticket;
-  }
-
-  getNombre(){
-    return this.nombre;
-  }
-
-  setNombre(nombre){
-    this.nombre = nombre;
-  }
-
-  getCc(){
-    return this.cc;
-  }
-
-  setCc(cc){
-    this.cc = cc;
-  }
-
-  getHora(){
-    return this.hora;
-  }
-
-  setHora(hora){
-    this.hora = hora;
-  }
-
-  getFecha(){
-    return this.fecha;
-  }
-
-  setFecha(fecha){
-    this.fecha = fecha;
-  }
-
-  getDuracion(){
-    return this.duracion;
-  }
-
-  setDuracion(duracion){
-    this.duracion = duracion;
-  }
-}
-
-class Banco{
-  constructor(tiempoLimite){
-    this.tiempoLimite = tiempoLimite;
-  }
-
-  getTiempoLimite(){
-    return this.tiempoLimite;
-  }
-
 }
 
 function limpiarCampos(campos){
@@ -100,6 +32,11 @@ function limpiarCampos(campos){
 }
 
 function simulateFifo(){
+  document.getElementById("btnCreateFifo").disabled = true;
+  document.getElementById("simulateFifo").disabled = true;
+  document.getElementById("btnCreateFifo").setAttribute("class","");
+  document.getElementById("simulateFifo").setAttribute("class","");
+
   let rows = document.getElementById("tableListo").getElementsByTagName("tr");
   let i = 0;
   let initialSize = rows.length-1;
@@ -111,7 +48,7 @@ function simulateFifo(){
           resolve();
         }
         resolve();
-      }, 1000);
+      }, 2000);
     });
 
     promise.then(res=>{
@@ -135,7 +72,7 @@ function simulateFifo(){
           let promise2 = new Promise((resolve)=>{
             setTimeout(()=>{
               resolve();
-            }, 1000);
+            }, 500);
           });
 
           promise2.then(res=>{
@@ -152,7 +89,7 @@ function simulateFifo(){
               clearInterval(interval2);
             }
           });
-        },1000);
+        },2000);
 
       }else{
         let tbody = document.createElement("tbody");
@@ -170,13 +107,13 @@ function simulateFifo(){
         fifo.shift();
 
         var interval3 = setInterval(()=>{
-          let promise2 = new Promise((resolve)=>{
+          let promise3 = new Promise((resolve)=>{
             setTimeout(()=>{
               resolve();
             }, 1000);
           });
 
-          promise2.then(res=>{
+          promise3.then(res=>{
             let rows2 = document.getElementById("tableCPU").getElementsByTagName("tr");
             if(rows2.length > 1) {
               let tbody2 = document.createElement("tbody");
@@ -186,16 +123,26 @@ function simulateFifo(){
 
               tbody2.insertRow(-1).innerHTML = tdx;
               rows2[1].remove();
+
+              document.getElementById("btnCreateFifo").disabled = false;
+              document.getElementById("simulateFifo").disabled = false;
+              document.getElementById("btnCreateFifo").setAttribute("class","btn-enviar mt-3");
+              document.getElementById("simulateFifo").setAttribute("class","btn-fifo");
+
               clearInterval(interval3);
             }
           });
-        },2000);
-
+        },2500);
+        
         clearInterval(interval);
       }
     });
     
   }, 2500);
+
+  
+  
+  
 }
 
 fifo = [{}];
