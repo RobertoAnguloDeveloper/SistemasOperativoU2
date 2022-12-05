@@ -100,18 +100,18 @@ function limpiarCampos(campos){
 }
 
 function simulateFifo(){
-  let element = document.getElementById('enCaja0');
-  let rows = document.getElementById("table1").getElementsByTagName("tr");
+  let rows = document.getElementById("tableListo").getElementsByTagName("tr");
   let i = 0;
   let initialSize = rows.length-1;
 
   var interval = setInterval(()=>{
     const promise = new Promise((resolve)=>{
       // console.log("[i]=>"+i+" rows.length=>"+ rows.length);
-      if(i < initialSize){
-        document.getElementById('enCaja'+i).innerHTML = "****";
-      }
-      
+      // if(i < initialSize){
+      //   //document.getElementById('enCaja'+i).innerHTML = "****";
+        
+      // }
+
       setTimeout(()=>{
         if(i < rows.length){
           resolve();
@@ -124,12 +124,75 @@ function simulateFifo(){
 
     promise.then(res=>{
       if (i < initialSize-1){
+        let tbody = document.createElement("tbody");
+        document.getElementById("tableCPU").appendChild(tbody);
+
+        let td1 = document.createElement("td").innerHTML = '<td>' + fifo[0].ticket + '</td>';
+        let td2 = document.createElement("td").innerHTML = '<td>' + fifo[0].nombre + '</td>';
+        let td3 = document.createElement("td").innerHTML = '<td>' + fifo[0].cc + '</td>';
+        let td4 = document.createElement("td").innerHTML = '<td>' + fifo[0].hora + '</td>';
+        let td5 = document.createElement("td").innerHTML = '<td>' + fifo[0].fecha + '</td>';
+
+        tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5;
         rows[1].remove()
         fifo.shift();
         i++;
       }else{
+        let tbody = document.createElement("tbody");
+        document.getElementById("tableCPU").appendChild(tbody);
+
+        let td1 = document.createElement("td").innerHTML = '<td>' + fifo[0].ticket + '</td>';
+        let td2 = document.createElement("td").innerHTML = '<td>' + fifo[0].nombre + '</td>';
+        let td3 = document.createElement("td").innerHTML = '<td>' + fifo[0].cc + '</td>';
+        let td4 = document.createElement("td").innerHTML = '<td>' + fifo[0].hora + '</td>';
+        let td5 = document.createElement("td").innerHTML = '<td>' + fifo[0].fecha + '</td>';
+
+        tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5;
         rows[1].remove()
         fifo.shift();
+
+        rows = document.getElementById("tableCPU").getElementsByTagName("tr");
+
+        i = 0;
+        initialSize = rows.length-1;
+
+        var interval2 = setInterval(()=>{
+          const promise2 = new Promise((resolve)=>{
+            setTimeout(()=>{
+              if(i < rows.length){
+                resolve();
+                setTimeout(()=>{
+                }, 1000);
+              }
+              resolve();
+            }, 1000);
+
+
+          });
+
+          promise2.then(res=>{
+            if (i < initialSize-1){
+              tbody = document.createElement("tbody");
+              document.getElementById("tableTerminado").appendChild(tbody);
+
+              td1 = document.createElement("td").innerHTML = rows[1].innerHTML;
+
+              tbody.insertRow(-1).innerHTML = td1;
+              rows[1].remove()
+              i++;
+            }else{
+              tbody = document.createElement("tbody");
+              document.getElementById("tableTerminado").appendChild(tbody);
+
+              td1 = document.createElement("td").innerHTML = rows[1].innerHTML;
+
+              tbody.insertRow(-1).innerHTML = td1;
+              rows[1].remove();
+              clearInterval(interval2);
+            }
+          });
+        },2000);
+
         clearInterval(interval);
       }
     });
@@ -166,24 +229,23 @@ function persona1(){
     fecha: p1.fecha
   });
 
-  if (document.getElementById("table1").querySelector("tbody")) {
-    document.getElementById("table1").querySelector("tbody").remove();
+  if (document.getElementById("tableListo").querySelector("tbody")) {
+    document.getElementById("tableListo").querySelector("tbody").remove();
   }
 
   let tbody = document.createElement("tbody");
 
   for (let i = 0; i < fifo.length; i++) {
     if (i == 0) {
-      document.getElementById("table1").appendChild(tbody);
+      document.getElementById("tableListo").appendChild(tbody);
     }
-    let enCaja = document.createElement("td").innerHTML = '<td id="enCaja'+i+'"></td>';
     let td1 = document.createElement("td").innerHTML = '<td>' + fifo[i].ticket + '</td>';
     let td2 = document.createElement("td").innerHTML = '<td>' + fifo[i].nombre + '</td>';
     let td3 = document.createElement("td").innerHTML = '<td>' + fifo[i].cc + '</td>';
     let td4 = document.createElement("td").innerHTML = '<td>' + fifo[i].hora + '</td>';
     let td5 = document.createElement("td").innerHTML = '<td>' + fifo[i].fecha + '</td>';
 
-    tbody.insertRow(-1).innerHTML = enCaja+td1+td2+td3+td4+td5; 
+    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5; 
   }
 
   let campos = [

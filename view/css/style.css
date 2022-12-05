@@ -13,7 +13,6 @@ body {
     height: auto;
     float: left;
     background-color: #fff;
-    margin: 50px 0px 0px 150px;
     padding-bottom: 1rem;
     border-radius: 16px;
     box-shadow: 2px 2px 2px 3px rgb(0 0 0 / 30%);
@@ -23,7 +22,6 @@ body {
     max-width: 400px;
     height: auto;
     background-color: #fff;
-    margin: 59px -590px 0px 0px;
     padding-bottom: 2rem;
     border-radius: 16px;
     box-shadow: 2px 2px 2px 3px rgb(0 0 0 / 30%);
@@ -78,7 +76,7 @@ h2 span {
 
 .btn-enviar {
     width: 300px;
-    margin-left: 18px;
+    margin-left: 1px;
     border-bottom: none;
     background-color: #4c9ed9;
     color: #fff;
@@ -87,7 +85,7 @@ h2 span {
 
 .btn-fifo {
     width: 300px;
-    margin-left: 18px;
+    margin-left: 1px;
     border-bottom: none;
     background-color: #4c9ed9;
     color: #fff;
