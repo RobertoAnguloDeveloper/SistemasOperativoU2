@@ -76,7 +76,7 @@ h2 span {
 
 .btnCustom {
     width: 300px;
-    padding: 2px;
+    padding: 5px;
     border: none;
     border-bottom: solid #c8c8c8 3.2px;
     transition: all .4s;
