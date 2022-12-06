@@ -34,8 +34,6 @@ function limpiarCampos(campos){
 function simulateFifo(){
   document.getElementById("btnCreateFifo").disabled = true;
   document.getElementById("simulateFifo").disabled = true;
-  document.getElementById("btnCreateFifo").setAttribute("class","");
-  document.getElementById("simulateFifo").setAttribute("class","");
 
   let rows = document.getElementById("tableListo").getElementsByTagName("tr");
   let i = 0;
@@ -126,8 +124,6 @@ function simulateFifo(){
 
               document.getElementById("btnCreateFifo").disabled = false;
               document.getElementById("simulateFifo").disabled = false;
-              document.getElementById("btnCreateFifo").setAttribute("class","btn-enviar mt-3");
-              document.getElementById("simulateFifo").setAttribute("class","btn-fifo");
 
               clearInterval(interval3);
             }
@@ -139,10 +135,6 @@ function simulateFifo(){
     });
     
   }, 2500);
-
-  
-  
-  
 }
 
 fifo = [{}];

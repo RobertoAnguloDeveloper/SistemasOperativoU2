@@ -74,42 +74,44 @@ h2 span {
     outline: none;
 }
 
-.btn-enviar {
+.btnCustom {
     width: 300px;
-    margin-left: 1px;
-    border-bottom: none;
+    padding: 2px;
+    border: none;
+    border-bottom: solid #c8c8c8 3.2px;
+    transition: all .4s;
+    outline: none;
     background-color: #4c9ed9;
     color: #fff;
-    border-radius: 18px;
+    border-radius: 15px;
 }
 
-.btn-fifo {
+.btnCustom:hover {
     width: 300px;
-    margin-left: 1px;
-    border-bottom: none;
-    background-color: #4c9ed9;
+    padding: 10px;
+    border: none;
+    border-bottom: solid #c8c8c8 3.2px;
+    background-color: #31b1b5;
     color: #fff;
     border-radius: 18px;
+    transition: all .4s;
+    outline: none;
 }
 
-.btn-rr {
+.btnCustom:disabled {
     width: 300px;
-    margin-left: 18px;
+    padding: 2px;
     border-bottom: none;
-    background-color: #4c9ed9;
-    color: #fff;
-    border-radius: 18px;
+    background-color: #626262;
+    color: rgb(255, 0, 0);
+    border-radius: 15px;
 }
 
-.btn-enviar:hover{
-    background-color: #31b1b5;
+.btnCustom:disabled:hover {
+    width: 300px;
+    padding: 2px;
+    border-bottom: none;
+    background-color: #626262;
+    color: rgb(255, 0, 0);
+    border-radius: 15px;
 }
-
-.btn-fifo:hover{
-    background-color: #31b1b5;
-}
-
-.btn-rr:hover{
-    background-color: #31b1b5;
-}
-
