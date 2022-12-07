@@ -1,23 +1,21 @@
 var ticket = 0;
 var ticketRR = 0;
-const tiempoFifo = 3;
 
 class Persona{
-  constructor(nombre, cc, duracion, hora, fecha){
-    if(duracion != null){
+  constructor(nombre, cc, rafaga, quantum, hora, fecha){
+    if(rafaga != null){
       ticketRR++;
       this.ticketRR = ticketRR;
       this.nombre = nombre;
-      this.tiempoLimite = tiempoFifo;
       this.cc = cc;
-      this.duracion = duracion;
+      this.rafaga = rafaga;
+      this.quantum = quantum;
       this.hora = hora;
       this.fecha = fecha;
     }else{
       ticket++;
       this.ticket = ticket;
       this.nombre = nombre;
-      this.tiempoLimite = tiempoFifo;
       this.cc = cc;
       this.hora = hora;
       this.fecha = fecha;
@@ -155,13 +153,14 @@ function persona1(){
     ticket = 0;
   }
 
-  const p1 = new Persona(nombre, cc, null, hora, fecha);
+  const p1 = new Persona(nombre, cc, null, null, hora, fecha);
 
   fifo.push({
     ticket: p1.ticket,
     nombre: p1.nombre,
     cc: p1.cc,
-    duracion: p1.duracion,
+    rafaga: p1.rafaga,
+    quantum: p1.quantum,
     hora: p1.hora,
     fecha: p1.fecha
   });
@@ -202,7 +201,7 @@ function simulateRR(){
   // console.log(roundRobin.length);
   // console.log("Click")
   if (rows.length > 1){
-    if(roundRobin[0].duracion <= roundRobin[0].cpuLimit){
+    if(roundRobin[0].rafaga <= roundRobin[0].cpuLimit){
       rows[1].remove();
       roundRobin.shift();
     }else{
@@ -220,7 +219,7 @@ function persona2(){
   let nombre = document.getElementById("nombre2").value;
   let cc = document.getElementById("cc2").value;
   let quantum = document.getElementById("quantum").value;
-  let cpuLimit = document.getElementById("cpuLimit").value;
+  let rafaga = document.getElementById("rafaga").value;
   let hora = fullDate[1];
   let fecha = fullDate[0];
 
@@ -228,14 +227,14 @@ function persona2(){
     ticketRR = 0;
   }
 
-  const p2 = new Persona(nombre, cc, quantum, hora, fecha);
+  const p2 = new Persona(nombre, cc, rafaga, quantum, hora, fecha);
 
   roundRobin.push({
     ticketRR: p2.ticketRR,
     nombre: p2.nombre,
     cc: p2.cc,
-    duracion: p2.duracion,
-    cpuLimit: cpuLimit,
+    rafaga: p2.rafaga,
+    quantum: quantum,
     hora: p2.hora,
     fecha: p2.fecha
   });
@@ -254,8 +253,8 @@ function persona2(){
     let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].ticketRR + '</td>';
     let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].nombre + '</td>';
     let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cc + '</td>';
-    let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].duracion + '</td>';
-    let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cpuLimit + '</td>';
+    let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].rafaga + '</td>';
+    let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].quantum + '</td>';
     let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
     let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
 
@@ -265,19 +264,19 @@ function persona2(){
   let campos = [
     document.getElementById("nombre2"),
     document.getElementById("cc2"),
-    document.getElementById("quantum")
+    document.getElementById("rafaga")
   ];
 
   limpiarCampos(campos);
 }
 
 function fijarCambiar(){
-  let cpuLimit = document.getElementById("cpuLimit");
-  if(!cpuLimit.disabled){
-    cpuLimit.disabled = true;
-    cpuLimit.style = "width: 150px; background-color: #ACD9DD;";
+  let quantum = document.getElementById("quantum");
+  if(!quantum.disabled){
+    quantum.disabled = true;
+    quantum.style = "width: 150px; background-color: #ACD9DD;";
   }else{
-    cpuLimit.style = "width: 150px; background-color: none;";
-    cpuLimit.disabled = false;
+    quantum.style = "width: 150px; background-color: none;";
+    quantum.disabled = false;
   }
 }

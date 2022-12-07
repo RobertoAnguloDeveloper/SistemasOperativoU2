@@ -37,7 +37,7 @@
                 <div class="row" style="width: 100%;">
                     <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
                         <h2 class="text-white" style="width: 450px;">Personas en Cola/LISTO</h2>
-                        <table class="table table-hover table-responsive-md table-success bg-opacity-100 table-striped" id="tableListo">
+                        <table class="table text-center table-hover table-responsive-md table-success bg-opacity-100 table-striped" id="tableListo">
                             <thead>
                                 <tr>
                                     <th scope="col">Ticket</th>
@@ -55,7 +55,7 @@
                     <div class="col" style="max-width:700px;">
                         <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
                             <h2 class="text-white" style="width: 550px;">Personas atendiendose en Caja/CPU</h2>
-                            <table class="table table-warning table-striped" id="tableCPU">
+                            <table class="table text-center table-warning table-striped" id="tableCPU">
                                 <thead>
                                     <tr>
                                         <th scope="col">Ticket</th>
@@ -71,7 +71,7 @@
                     <div class="col">
                         <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
                             <h2 class="text-white" style="width: 450px;">Personas atendidas/TERMINADO</h2>
-                            <table class="table table-striped table-danger" id="tableTerminado">
+                            <table class="table text-center table-striped table-danger" id="tableTerminado">
                                 <thead>
                                     <tr>
                                         <th scope="col">Ticket</th>
@@ -96,7 +96,7 @@
                         <div class="input-reg_rr">
                             <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre" required>
                             <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula" required>
-                            <input class="input" type="number" id="quantum" placeholder="Tiempo de ráfaga(s)" min="1" max="5" required>
+                            <input class="input" type="number" id="rafaga" placeholder="Tiempo de ráfaga(s)" min="1" max="5" required>
                         </div>
                         <input class="btnCustom" style="width: 110px;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
                         <input class="btnCustom" style="width: 190px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="">
@@ -104,26 +104,66 @@
                 </div>
             </div>
 
-            <div class="col-sm" style="margin-left: -500px;">
-                <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
-                    <h2 class="text-white">Round Robin</h2>
-                    <div style=" margin-left: 502px; margin-top: -50px;">
-                        <input class="btnCustom" style="width: 200px;" type="button" id="fijarLimite" value="Fijar/Cambiar Quantum(s)" onclick="fijarCambiar();">
-                        <input class="input" style="width: 150px;" type="number" id="cpuLimit" placeholder="Quantum CPU(s)" min="1" max="5">
+            <div class="col" style="margin-left: -500px;">
+                <div class="row">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white">Personas en Cola/LISTO</h2>
+                        <div style=" margin-left: 502px; margin-top: -50px;">
+                            <input class="btnCustom" style="width: 200px;" type="button" id="fijarLimite" value="Fijar/Cambiar Quantum(s)" onclick="fijarCambiar();">
+                            <input class="input" style="width: 150px;" type="number" id="quantum" placeholder="Quantum CPU(s)" min="1" max="5">
+                        </div>
+                        <table class="table text-center table-responsive-md table-success table-striped" id="table2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Tiempo de ráfaga(s)</th>
+                                    <th scope="col">Quantum CPU(s)</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <table class="table table-responsive-md table-secondary table-striped" id="table2">
-                        <thead>
-                            <tr>
-                                <th scope="col">Ticket</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cedula</th>
-                                <th scope="col">Tiempo de ráfaga(s)</th>
-                                <th scope="col">Quantum CPU(s)</th>
-                                <th scope="col">Hora de Llegada</th>
-                                <th scope="col">Fecha</th>
-                            </tr>
-                        </thead>
-                    </table>
+                </div>
+                
+                <div class="row">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white">Personas atendiendose en Caja/CPU</h2>
+                        <table class="table text-center table-responsive-md table-warning table-striped" id="table2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Tiempo de ráfaga(s)</th>
+                                    <th scope="col">Quantum CPU(s)</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white">Personas atendidas/TERMINADO</h2>
+                        <table class="table  text-centertable-responsive-md table-danger table-striped" id="table2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Tiempo de ráfaga(s)</th>
+                                    <th scope="col">Quantum CPU(s)</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
