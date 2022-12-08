@@ -208,7 +208,7 @@ function simulateRR(){
   // asyncFunction();
 
   const asyncFunction = async ()=>{
-    
+    await wait(1000);
     var interval6 = setInterval(()=>{
       let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
       if (rows.length > 1){
@@ -237,6 +237,11 @@ function simulateRR(){
           
           rows[1].remove();
           roundRobin.shift();
+          const toTable3 = async()=>{
+            console.log("Entro");
+            await wait(1000);
+          }
+          toTable3();
         }else{
           if(rafaga > quantum){
             
@@ -254,6 +259,7 @@ function simulateRR(){
             tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
             rows[1].remove();
             roundRobin.push(roundRobin.shift());
+            
           }else{
             let tbody = document.createElement("tbody");
             document.getElementById("tableRR2").appendChild(tbody);
@@ -269,6 +275,7 @@ function simulateRR(){
             tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
             rows[1].remove();
             roundRobin.shift();
+            
           }
         }
       }else{
