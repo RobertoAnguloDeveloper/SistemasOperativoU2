@@ -196,26 +196,97 @@ roundRobin = [{}];
 roundRobin.shift();
 
 function simulateRR(){
-  let rows = document.getElementById("table2").getElementsByTagName("tr");
-  // 
-  // console.log(roundRobin.length);
-  // console.log("Click")
-  if (rows.length > 1){
-    if(roundRobin[0].rafaga <= roundRobin[0].cpuLimit){
-      rows[1].remove();
-      roundRobin.shift();
-    }else{
-      let aux = rows[rows.length-1]
-      rows[rows.length-1] = rows[1];
-    }
+  
+  const wait = async ms => new Promise(resolve => setTimeout(resolve, ms));
+  // const asyncFunction = async ()=>{
+  //   console.log("1");
+  //   await wait(1000);
+  //   console.log("2");
+  //   await wait(1000);
+  //   console.log("3");
+  // }
+  // asyncFunction();
+
+  const asyncFunction = async ()=>{
+    
+    var interval6 = setInterval(()=>{
+      let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
+      if (rows.length > 1){
+        
+        let rafaga = roundRobin[0].rafaga;
+        let quantum = roundRobin[0].quantum;
+
+        let remainingTime = Math.abs(rafaga - quantum);
+
+        rows[1].cells[3] = remainingTime;
+        roundRobin[0].rafaga = remainingTime;
+
+        if (remainingTime === 0){
+          let tbody = document.createElement("tbody");
+          document.getElementById("tableRR2").appendChild(tbody);
+
+          let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].ticketRR + '</td>';
+          let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].nombre + '</td>';
+          let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].cc + '</td>';
+          let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].rafaga + '</td>';
+          let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].quantum + '</td>';
+          let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].hora + '</td>';
+          let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].fecha + '</td>';
+
+          tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
+          
+          rows[1].remove();
+          roundRobin.shift();
+        }else{
+          if(rafaga > quantum){
+            
+            let tbody = document.createElement("tbody");
+            document.getElementById("tableRR1").appendChild(tbody);
+
+            let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].ticketRR + '</td>';
+            let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].nombre + '</td>';
+            let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].cc + '</td>';
+            let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].rafaga + '</td>';
+            let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].quantum + '</td>';
+            let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].hora + '</td>';
+            let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].fecha + '</td>';
+
+            tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
+            rows[1].remove();
+            roundRobin.push(roundRobin.shift());
+          }else{
+            let tbody = document.createElement("tbody");
+            document.getElementById("tableRR2").appendChild(tbody);
+
+            let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].ticketRR + '</td>';
+            let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].nombre + '</td>';
+            let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].cc + '</td>';
+            let td4 = document.createElement("td").innerHTML = '<td>' + 0 + '</td>';
+            let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].quantum + '</td>';
+            let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].hora + '</td>';
+            let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].fecha + '</td>';
+
+            tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
+            rows[1].remove();
+            roundRobin.shift();
+          }
+        }
+      }else{
+        console.log("Completed!");
+        clearInterval(interval6);
+      }
+    },1000);
+
+    
   }
+  asyncFunction();
 }
 
 function persona2(){
   let today = new Date();
   let now = today.toLocaleString();
   let fullDate = now.split(",");
-
+  
   let nombre = document.getElementById("nombre2").value;
   let cc = document.getElementById("cc2").value;
   let quantum = document.getElementById("quantum").value;
@@ -227,47 +298,54 @@ function persona2(){
     ticketRR = 0;
   }
 
-  const p2 = new Persona(nombre, cc, rafaga, quantum, hora, fecha);
+  if(quantum != "" && rafaga != ""){
+    
+    const p2 = new Persona(nombre, cc, parseInt(rafaga), parseInt(quantum), hora, fecha);
 
-  roundRobin.push({
-    ticketRR: p2.ticketRR,
-    nombre: p2.nombre,
-    cc: p2.cc,
-    rafaga: p2.rafaga,
-    quantum: quantum,
-    hora: p2.hora,
-    fecha: p2.fecha
-  });
+    roundRobin.push({
+      ticketRR: p2.ticketRR,
+      nombre: p2.nombre,
+      cc: p2.cc,
+      rafaga: p2.rafaga,
+      quantum: p2.quantum,
+      hora: p2.hora,
+      fecha: p2.fecha
+    });
 
-  if (document.getElementById("table2").querySelector("tbody")) {
-    document.getElementById("table2").querySelector("tbody").remove();
-  }
-
-  let tbody = document.createElement("tbody");
-  
-  for (let i = 0; i < roundRobin.length; i++) {
-    if (i == 0) {
-      document.getElementById("table2").appendChild(tbody);
+    if (document.getElementById("tableRR1").querySelector("tbody")) {
+      document.getElementById("tableRR1").querySelector("tbody").remove();
     }
 
-    let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].ticketRR + '</td>';
-    let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].nombre + '</td>';
-    let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cc + '</td>';
-    let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].rafaga + '</td>';
-    let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].quantum + '</td>';
-    let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
-    let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
+    let tbody = document.createElement("tbody");
+    
+    for (let i = 0; i < roundRobin.length; i++) {
+      if (i == 0) {
+        document.getElementById("tableRR1").appendChild(tbody);
+      }
 
-    tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7; 
+      let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].ticketRR + '</td>';
+      let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].nombre + '</td>';
+      let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cc + '</td>';
+      let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].rafaga + '</td>';
+      let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].quantum + '</td>';
+      let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
+      let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
+
+      tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7; 
+    }
+
+    let campos = [
+      document.getElementById("nombre2"),
+      document.getElementById("cc2"),
+      document.getElementById("rafaga")
+    ];
+
+    limpiarCampos(campos);
+  }else if(quantum == ""){
+    alert("Debes llenar el campo QUANTUM");
+  }else{
+    alert("Debes llenar el campo RÁFAGA");
   }
-
-  let campos = [
-    document.getElementById("nombre2"),
-    document.getElementById("cc2"),
-    document.getElementById("rafaga")
-  ];
-
-  limpiarCampos(campos);
 }
 
 function fijarCambiar(){

@@ -19,14 +19,14 @@
     </div>
     
     <section class="container mt-5">
-        <div class="row" >
+        <div class="row">
             <div class="col">
                 <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
                     <div class="form-tittle" style="padding-bottom: unset;">
                         <h2 class="mx-auto">FIFO</h2>    
                         <div class="input-reg" id="fifo">
-                            <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre" required>
-                            <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula" required>
+                            <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre">
+                            <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula">
                         </div>
                         <input class="btnCustom" style="width: 120px;" type="button" id="btnCreateFifo" value="Crear proceso" onclick="persona1();">
                         <input class="btnCustom" style="width: 120px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="simulateFifo();">
@@ -99,7 +99,7 @@
                             <input class="input" type="number" id="rafaga" placeholder="Tiempo de ráfaga(s)" min="1" max="5" required>
                         </div>
                         <input class="btnCustom" style="width: 110px;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
-                        <input class="btnCustom" style="width: 190px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="">
+                        <input class="btnCustom" style="width: 190px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="simulateRR();">
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                             <input class="btnCustom" style="width: 200px;" type="button" id="fijarLimite" value="Fijar/Cambiar Quantum(s)" onclick="fijarCambiar();">
                             <input class="input" style="width: 150px;" type="number" id="quantum" placeholder="Quantum CPU(s)" min="1" max="5">
                         </div>
-                        <table class="table text-center table-responsive-md table-success table-striped" id="table2">
+                        <table class="table text-center table-responsive-md table-success table-striped" id="tableRR1">
                             <thead>
                                 <tr>
                                     <th scope="col">Ticket</th>
@@ -131,7 +131,7 @@
                 <div class="row">
                     <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
                         <h2 class="text-white">Personas atendiendose en Caja/CPU</h2>
-                        <table class="table text-center table-responsive-md table-warning table-striped" id="table2">
+                        <table class="table text-center table-responsive-md table-warning table-striped" id="tableRR2">
                             <thead>
                                 <tr>
                                     <th scope="col">Ticket</th>
@@ -150,7 +150,7 @@
                 <div class="row">
                     <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
                         <h2 class="text-white">Personas atendidas/TERMINADO</h2>
-                        <table class="table  text-centertable-responsive-md table-danger table-striped" id="table2">
+                        <table class="table  text-centertable-responsive-md table-danger table-striped" id="tableRR3">
                             <thead>
                                 <tr>
                                     <th scope="col">Ticket</th>
