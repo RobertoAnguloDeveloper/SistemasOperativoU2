@@ -1,9 +1,9 @@
 var ticket = 0;
 var ticketRR = 0;
-
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
+var fifo = [{}];
+fifo.shift();
+var roundRobin = [{}];
+roundRobin.shift();
 
 class Persona{
   constructor(nombre, cc, rafaga, quantum, hora, fecha){
@@ -27,10 +27,40 @@ class Persona{
   }
 }
 
-function limpiarCampos(campos){
-  for(let i=0;i<campos.length;i++){
-    campos[i].value = "";
+function persona1(){
+  let today = new Date();
+  let now = today.toLocaleString();
+  let fullDate = now.split(",");
+
+  let nombre = document.getElementById("nombre1").value;
+  let cc = document.getElementById("cc1").value;
+  let hora = fullDate[1];
+  let fecha = fullDate[0];
+  
+  if(fifo.length == 0){
+    ticket = 0;
   }
+
+  const p1 = new Persona(nombre, cc, null, null, hora, fecha);
+
+  fifo.push({
+    ticket: p1.ticket,
+    nombre: p1.nombre,
+    cc: p1.cc,
+    rafaga: p1.rafaga,
+    quantum: p1.quantum,
+    hora: p1.hora,
+    fecha: p1.fecha
+  });
+  
+  putIntoTable("tableListo", fifo, Object.keys(fifo[0]));
+
+  let campos = [
+    document.getElementById("nombre1"),
+    document.getElementById("cc1"),
+  ]
+
+  limpiarCampos(campos);
 }
 
 function simulateFifo(){
@@ -71,48 +101,51 @@ function simulateFifo(){
   asyncFunctionFifo();
 }
 
-fifo = [{}];
-
-fifo.shift();
-
-function persona1(){
+function persona2(){
   let today = new Date();
   let now = today.toLocaleString();
   let fullDate = now.split(",");
-
-  let nombre = document.getElementById("nombre1").value;
-  let cc = document.getElementById("cc1").value;
+  
+  let nombre = document.getElementById("nombre2").value;
+  let cc = document.getElementById("cc2").value;
+  let quantum = document.getElementById("quantum").value;
+  let rafaga = document.getElementById("rafaga").value;
   let hora = fullDate[1];
   let fecha = fullDate[0];
-  
-  if(fifo.length == 0){
-    ticket = 0;
+
+  if(roundRobin.length == 0){
+    ticketRR = 0;
   }
 
-  const p1 = new Persona(nombre, cc, null, null, hora, fecha);
+  if(quantum != "" && rafaga != ""){
+    
+    const p2 = new Persona(nombre, cc, parseInt(rafaga), parseInt(quantum), hora, fecha);
 
-  fifo.push({
-    ticket: p1.ticket,
-    nombre: p1.nombre,
-    cc: p1.cc,
-    rafaga: p1.rafaga,
-    quantum: p1.quantum,
-    hora: p1.hora,
-    fecha: p1.fecha
-  });
-  
-  putIntoTable("tableListo", fifo, Object.keys(fifo[0]));
+    roundRobin.push({
+      ticketRR: p2.ticketRR,
+      nombre: p2.nombre,
+      cc: p2.cc,
+      rafaga: p2.rafaga,
+      quantum: p2.quantum,
+      hora: p2.hora,
+      fecha: p2.fecha
+    });
 
-  let campos = [
-    document.getElementById("nombre1"),
-    document.getElementById("cc1"),
-  ]
+    putIntoTable("tableRR1", roundRobin, Object.keys(roundRobin[0]));
 
-  limpiarCampos(campos);
+    let campos = [
+      document.getElementById("nombre2"),
+      document.getElementById("cc2"),
+      document.getElementById("rafaga")
+    ];
+
+    limpiarCampos(campos);
+  }else if(quantum == ""){
+    alert("Debes llenar el campo QUANTUM");
+  }else{
+    alert("Debes llenar el campo RÁFAGA");
+  }
 }
-
-roundRobin = [{}];
-roundRobin.shift();
 
 function simulateRR(){
 
@@ -197,69 +230,15 @@ function simulateRR(){
   asyncFunction();
 }
 
-function persona2(){
-  let today = new Date();
-  let now = today.toLocaleString();
-  let fullDate = now.split(",");
-  
-  let nombre = document.getElementById("nombre2").value;
-  let cc = document.getElementById("cc2").value;
-  let quantum = document.getElementById("quantum").value;
-  let rafaga = document.getElementById("rafaga").value;
-  let hora = fullDate[1];
-  let fecha = fullDate[0];
 
-  if(roundRobin.length == 0){
-    ticketRR = 0;
-  }
 
-  if(quantum != "" && rafaga != ""){
-    
-    const p2 = new Persona(nombre, cc, parseInt(rafaga), parseInt(quantum), hora, fecha);
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 
-    roundRobin.push({
-      ticketRR: p2.ticketRR,
-      nombre: p2.nombre,
-      cc: p2.cc,
-      rafaga: p2.rafaga,
-      quantum: p2.quantum,
-      hora: p2.hora,
-      fecha: p2.fecha
-    });
-
-    if (document.getElementById("tableRR1").querySelector("tbody")) {
-      document.getElementById("tableRR1").querySelector("tbody").remove();
-    }
-
-    let tbody = document.createElement("tbody");
-    
-    for (let i = 0; i < roundRobin.length; i++) {
-      if (i == 0) {
-        document.getElementById("tableRR1").appendChild(tbody);
-      }
-
-      let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].ticketRR + '</td>';
-      let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].nombre + '</td>';
-      let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].cc + '</td>';
-      let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].rafaga + '</td>';
-      let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].quantum + '</td>';
-      let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].hora + '</td>';
-      let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[i].fecha + '</td>';
-
-      tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7; 
-    }
-
-    let campos = [
-      document.getElementById("nombre2"),
-      document.getElementById("cc2"),
-      document.getElementById("rafaga")
-    ];
-
-    limpiarCampos(campos);
-  }else if(quantum == ""){
-    alert("Debes llenar el campo QUANTUM");
-  }else{
-    alert("Debes llenar el campo RÁFAGA");
+function limpiarCampos(campos){
+  for(let i=0;i<campos.length;i++){
+    campos[i].value = "";
   }
 }
 
@@ -308,7 +287,6 @@ function putIntoTable(tableId, dataArray, labelsArray){
     }
     wholeRow.push(rowString);
   }
-
   
   for (let i = 0; i < wholeRow.length; i++) {
     tbody.insertRow(-1).innerHTML = wholeRow[i];
