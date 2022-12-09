@@ -69,13 +69,11 @@ function simulateFifo(){
   disabled(buttons, true);
 
   let rows = document.getElementById("tableListo").getElementsByTagName("tr");
-  let rowsTableCPU = document.getElementById("tableCPU").getElementsByTagName("tr");
   
   let rowFinished = [];
 
   const asyncFunctionFifo = async ()=>{
     var intervalFF = setInterval(()=>{
-      
       if (rows.length > 1){
         rows[1].remove();
         let rowCpu = [];
@@ -88,7 +86,8 @@ function simulateFifo(){
         });
 
         sleep(2000).then(() => {
-          rowsTableCPU[1].remove();
+          let rowTableCPU = document.getElementById("tableCPU").getElementsByTagName("tr")[1]
+          rowTableCPU.remove();
           putIntoTable("tableTerminado", rowFinished, Object.keys(rowFinished[0]));
         });
 
@@ -152,7 +151,7 @@ function simulateRR(){
 
   disabled(buttons, true);
   
-  let rowsTableCPU = document.getElementById("tableRR2").getElementsByTagName("tr");
+  //let rowsTableCPU = document.getElementById("tableRR2").getElementsByTagName("tr");
   let rowFinished = [];
   let i = 0;
   const asyncFunctionRR = async ()=>{
@@ -169,10 +168,8 @@ function simulateRR(){
 
         rows[0].cells[3].innerText = remainingTime;
         roundRobin[0].rafaga = remainingTime;
-
         
         if(rafaga < quantum || remainingTime === 0){
-          console.log(rows[0]);
           rows[0].remove();
           rows.shift();
           rowCpu[0] = roundRobin.shift();
@@ -184,11 +181,11 @@ function simulateRR(){
           });
 
           sleep(2000).then(() => {
-            rowsTableCPU[1].remove();
+            let rowsTableCPU = document.getElementById("tableRR2").getElementsByTagName("tr")[1];
+            rowsTableCPU.remove();
             putIntoTable("tableRR3", rowFinished, Object.keys(rowFinished[0]));
           });
         }else {
-          console.log("ITERACION #"+i);
           rows.push(rows.shift());
           roundRobin.push(roundRobin.shift());
           putIntoTable("tableRR1", roundRobin, Object.keys(roundRobin[0]));
@@ -198,7 +195,6 @@ function simulateRR(){
         disabled(buttons, false);
         clearInterval(intervalRR);
       }
-      
     }, 2200);
   }
   asyncFunctionRR();
