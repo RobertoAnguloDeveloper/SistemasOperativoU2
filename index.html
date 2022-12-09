@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="view/js/classes.js"></script>
+    <script src="view/js/test.js"></script>
     <link rel="stylesheet" href="/view/css/style.css">
     <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/view/Boostrap/bootstrap/css/bootstrap-grid.css">
@@ -13,82 +13,157 @@
     <title>SISTEMAS OPERATIVOS</title>
 </head>
 
-<body>
-    <h1 class="mx-auto" style="width: 900px;margin-top: -1%;">SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
-    <section class="container" style="margin-top: -3%;">
-        <div class="row" style="margin-bottom: -5%;">
-            <div class="col" style="margin-left: 50px; margin-right: unset">
+<body class="body">
+    <div class="container-fluid" style="background-color: rgba(35, 35, 35, 0.762);">
+        <h1 class="text-center">SIMULACION DE ESTRATEGIAS DE PLANIFICACION</h1>
+    </div>
+    
+    <section class="container mt-5">
+        <div class="row">
+            <div class="col">
                 <div class="container-input_rr" style="width: 300px;padding-bottom: 2%;">
                     <div class="form-tittle" style="padding-bottom: unset;">
                         <h2 class="mx-auto">FIFO</h2>    
                         <div class="input-reg" id="fifo">
-                            <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre" required>
-                            <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula" required>
-                            <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateFifo" value="Crear proceso" onclick="persona1();">
+                            <input class="input" type="text" name="nombre" id="nombre1" placeholder="Nombre">
+                            <input class="input" type="number" name="cc" id="cc1" placeholder="Cedula">
+                        </div>
+                        <input class="btnCustom" style="width: 120px;" type="button" id="btnCreateFifo" value="Crear proceso" onclick="persona1();">
+                        <input class="btnCustom" style="width: 120px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="simulateFifo();">
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="max-width: 650px;">
+                <div class="row" style="width: 100%;">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white" style="width: 450px;">Personas en Cola/LISTO</h2>
+                        <table class="table text-center table-hover table-responsive-md table-success bg-opacity-100 table-striped" id="tableListo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%; margin-left:-20px;">
+                    <div class="col" style="max-width:700px;">
+                        <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                            <h2 class="text-white" style="width: 550px;">Personas atendiendose en Caja/CPU</h2>
+                            <table class="table text-center table-warning table-striped" id="tableCPU">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ticket</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cedula</th>
+                                        <th scope="col">Hora de Llegada</th>
+                                        <th scope="col">Fecha</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                            <h2 class="text-white" style="width: 450px;">Personas atendidas/TERMINADO</h2>
+                            <table class="table text-center table-striped table-danger" id="tableTerminado">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ticket</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cedula</th>
+                                        <th scope="col">Hora de Llegada</th>
+                                        <th scope="col">Fecha</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm mt-3">
-                <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-bottom">
-                    <h2 class="mx-auto text-secondary" style="width: 100px;">FIFO</h2>
-                    <table class="table table-secondary table-striped" id="table1">
-                        <thead>
-                            <tr>
-                                <th scope="col">En caja</th>
-                                <th scope="col">Ticket</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cedula</th>
-                                <th scope="col">Hora de Llegada</th>
-                                <th scope="col">Fecha</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <input class="btn-fifo mx-auto mt-5" style="width: 120px;" type="button" id="simulateFifo" value="SIMULAR FIFO" onclick="simulateFifo();">
-                </div>
-            </div>
         </div>
-
-        <div class="row">
-            <div class="col" style="margin-left: 50px; margin-right: unset">
-                <div class="container-input_rr" style="width: 300px;padding-bottom: 0%;">
+        
+        <div class="row mt-3">
+            <div class="col">
+                <div class="container-input_rr" style="width: 350px;">
                     <div class="form-tittle" style="padding-bottom: unset;">
                         <h2 class="mx-auto">Round Robin</h2>
                         <div class="input-reg_rr">
                             <input class="input" type="text" name="nombre" id="nombre2" placeholder="Nombre" required>
                             <input class="input" type="number" name="cc" id="cc2" placeholder="Cedula" required>
-                            <input class="input" type="number" id="quantum" placeholder="Tiempo con CPU(s)" min="1" max="5" required>
-                            <input class="btn-enviar mx-auto mt-3" style="width: 50%;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
+                            <input class="input" type="number" id="rafaga" placeholder="Tiempo de ráfaga(s)" min="1" max="5" required>
                         </div>
+                        <input class="btnCustom" style="width: 110px;" type="button" id="btnCreateRoundRobin" value="Crear proceso" onclick="persona2();">
+                        <input class="btnCustom" style="width: 190px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="simulateRR();">
                     </div>
                 </div>
             </div>
 
-            <div class="col" style="margin-top: 5%;margin-left: -30%;">
-                
-            </div>
-
-            <div class="col-sm mt-3" style="margin-left: -45%;">
-                <div class=" mt-5 shadow p-3 mb-5 bg-white rounded-lg">
-                    <h2 class="text-secondary " style="width: 180px;">Round Robin</h2>
-                    <div style="margin-left:52%; margin-top: -12%;">
-                        <input class="btn-fifo mx-auto mt-5" style="width: 180px;" type="button" id="fijarLimite" value="Fijar/Cambiar límite (s)" onclick="fijarCambiar();">
-                        <input class="input" style="width: 150px;" type="number" id="cpuLimit" placeholder="Limite CPU(s)" min="1" max="5">
+            <div class="col" style="margin-left: -500px;">
+                <div class="row">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white">Personas en Cola/LISTO</h2>
+                        <div style=" margin-left: 502px; margin-top: -50px;">
+                            <input class="btnCustom" style="width: 200px;" type="button" id="fijarLimite" value="Fijar/Cambiar Quantum(s)" onclick="fijarCambiar();">
+                            <input class="input" style="width: 150px;" type="number" id="quantum" placeholder="Quantum CPU(s)" min="1" max="5">
+                        </div>
+                        <table class="table text-center table-responsive-md table-success table-striped" id="tableRR1">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Tiempo de ráfaga(s)</th>
+                                    <th scope="col">Quantum CPU(s)</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <table class="table table-secondary table-striped" id="table2">
-                        <thead>
-                            <tr>
-                                <th scope="col">Ticket</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cedula</th>
-                                <th scope="col">Tiempo con CPU(s)</th>
-                                <th scope="col">Limite CPU(s)</th>
-                                <th scope="col">Hora de Llegada</th>
-                                <th scope="col">Fecha</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <input class="btn-fifo mx-auto mt-5" style="width: 200px;" type="button" id="simulateRR" value="SIMULAR ROUND ROBIN" onclick="">
+                </div>
+                
+                <div class="row">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white">Personas atendiendose en Caja/CPU</h2>
+                        <table class="table text-center table-responsive-md table-warning table-striped" id="tableRR2">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Tiempo de ráfaga(s)</th>
+                                    <th scope="col">Quantum CPU(s)</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="shadow p-3 mb-5 rounded-bottom tables-custom-bg" style="border-radius: 15px;">
+                        <h2 class="text-white">Personas atendidas/TERMINADO</h2>
+                        <table class="table  text-centertable-responsive-md table-danger table-striped" id="tableRR3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Ticket</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Tiempo de ráfaga(s)</th>
+                                    <th scope="col">Quantum CPU(s)</th>
+                                    <th scope="col">Hora de Llegada</th>
+                                    <th scope="col">Fecha</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
