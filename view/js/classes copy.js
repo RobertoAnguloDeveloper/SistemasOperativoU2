@@ -30,8 +30,9 @@ function limpiarCampos(campos){
 }
 
 function simulateFifo(){
-  let buttonsId = ["btnCreateFifo", "simulateFifo"];
-  disabled(buttonsId);
+  buttons = ["btnCreateFifo","simulateFifo"];
+  document.getElementById("btnCreateFifo").disabled = true;
+  document.getElementById("simulateFifo").disabled = true;
 
   let rows = document.getElementById("tableListo").getElementsByTagName("tr");
   let i = 0;
@@ -195,15 +196,9 @@ function persona1(){
 roundRobin = [{}];
 roundRobin.shift();
 
-const wait = async ms => new Promise(resolve => setTimeout(resolve, ms));
-
-const toTable3 = async(txt)=>{
-  console.log(txt);
-  await wait(1000);
-}
-
 function simulateRR(){
   
+  const wait = async ms => new Promise(resolve => setTimeout(resolve, ms));
   // const asyncFunction = async ()=>{
   //   console.log("1");
   //   await wait(1000);
@@ -214,6 +209,7 @@ function simulateRR(){
   // asyncFunction();
 
   const asyncFunction = async ()=>{
+    await wait(1000);
     var interval6 = setInterval(()=>{
       let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
       if (rows.length > 1){
@@ -227,7 +223,6 @@ function simulateRR(){
         roundRobin[0].rafaga = remainingTime;
 
         if (remainingTime === 0){
-          toTable3("1");
           let tbody = document.createElement("tbody");
           document.getElementById("tableRR2").appendChild(tbody);
 
@@ -243,8 +238,11 @@ function simulateRR(){
           
           rows[1].remove();
           roundRobin.shift();
-          
-          toTable3("2");
+          const toTable3 = async()=>{
+            console.log("Entro");
+            await wait(1000);
+          }
+          toTable3();
         }else{
           if(rafaga > quantum){
             
@@ -369,12 +367,7 @@ function fijarCambiar(){
   }
 }
 
-function disabled(buttonsId){
-  var buttons = [];
-  for (let i = 0; i < buttonsId.length; i++) {
-    buttons[i] = document.getElementById(buttonsId[i]);
-  }
-
+function disabled(buttons){
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].disabled = true;
   }
