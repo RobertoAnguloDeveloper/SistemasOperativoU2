@@ -154,16 +154,16 @@ function simulateRR(){
   let rows = [].slice.call(document.getElementById("tableRR1").getElementsByTagName("tr"));
   rows.shift();
   //let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
-  //let rowsTableCPU = document.getElementById("tableRR2").getElementsByTagName("tr");
-  let rowsTableCPU = [].slice.call(document.getElementById("tableRR2").getElementsByTagName("tr"));
-  rowsTableCPU.shift();
+  let rowsTableCPU = document.getElementById("tableRR2").getElementsByTagName("tr");
+  //let rowsTableCPU = [].slice.call(document.getElementById("tableRR2").getElementsByTagName("tr"));
+  //rowsTableCPU.shift();
   //console.log(rows);
   let rowFinished = [];
 
   const asyncFunctionRR = async ()=>{
     var intervalRR = setInterval(()=>{
       let rowCpu = [];
-      if (rows.length > 1 && roundRobin.length > 0){
+      if (rows.length > 0){
         let rafaga = roundRobin[0].rafaga;
         let quantum = roundRobin[0].quantum;
 
@@ -185,13 +185,12 @@ function simulateRR(){
           rowFinished.push(rowCpu[0]);
           
           sleep(1000).then(() => {
-            rowsTableCPU.push(rows.shift());
+            rows.shift();
             putIntoTable("tableRR2", rowCpu, Object.keys(rowCpu[0]));
           });
 
           sleep(2000).then(() => {
-            rowsTableCPU[0].remove();
-            rowsTableCPU.push(rowsTableCPU.shift());
+            rowsTableCPU[1].remove();
             putIntoTable("tableRR3", rowFinished, Object.keys(rowFinished[0]));
           });
         }else {
