@@ -151,41 +151,35 @@ function simulateRR(){
   buttons = ["btnCreateRoundRobin","simulateRR"];
 
   disabled(buttons, true);
-  let rows = [].slice.call(document.getElementById("tableRR1").getElementsByTagName("tr"));
-  rows.shift();
-  //let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
+  
   let rowsTableCPU = document.getElementById("tableRR2").getElementsByTagName("tr");
-  //let rowsTableCPU = [].slice.call(document.getElementById("tableRR2").getElementsByTagName("tr"));
-  //rowsTableCPU.shift();
-  //console.log(rows);
   let rowFinished = [];
-
+  let i = 0;
   const asyncFunctionRR = async ()=>{
     var intervalRR = setInterval(()=>{
+      let rows = [].slice.call(document.getElementById("tableRR1").getElementsByTagName("tr"));
+      rows.shift();
       let rowCpu = [];
+      
       if (rows.length > 0){
-        let rafaga = roundRobin[0].rafaga;
-        let quantum = roundRobin[0].quantum;
+        let rafaga = parseInt(rows[0].cells[3].innerText);
+        let quantum = parseInt(rows[0].cells[4].innerText);
 
         let remainingTime = Math.abs(rafaga - quantum);
 
         rows[0].cells[3].innerText = remainingTime;
         roundRobin[0].rafaga = remainingTime;
 
-        //console.log(rows[1].cells[3].innerHTML);
-
-        if(rafaga < quantum){
-          //console.log(rows[1].cells)
-          //rows[1].remove();
+        
+        if(rafaga < quantum || remainingTime === 0){
+          console.log(rows[0]);
           rows[0].remove();
-          
-          
+          rows.shift();
           rowCpu[0] = roundRobin.shift();
           rowCpu[0].rafaga = 0;
           rowFinished.push(rowCpu[0]);
           
-          sleep(500).then(() => {
-            rows.shift();
+          sleep(1000).then(() => {
             putIntoTable("tableRR2", rowCpu, Object.keys(rowCpu[0]));
           });
 
@@ -194,97 +188,20 @@ function simulateRR(){
             putIntoTable("tableRR3", rowFinished, Object.keys(rowFinished[0]));
           });
         }else {
-          
-
+          console.log("ITERACION #"+i);
+          rows.push(rows.shift());
+          roundRobin.push(roundRobin.shift());
+          putIntoTable("tableRR1", roundRobin, Object.keys(roundRobin[0]));
         }
         
       }else{
         disabled(buttons, false);
         clearInterval(intervalRR);
       }
-    }, 2500);
+      
+    }, 2200);
   }
   asyncFunctionRR();
-
-  // const asyncFunction = async ()=>{
-  //   var interval6 = setInterval(()=>{
-  //     let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
-  //     if (rows.length > 1){
-        
-  //       let rafaga = roundRobin[0].rafaga;
-  //       let quantum = roundRobin[0].quantum;
-
-  //       let remainingTime = Math.abs(rafaga - quantum);
-
-  //       rows[1].cells[3] = remainingTime;
-  //       roundRobin[0].rafaga = remainingTime;
-
-  //       if (remainingTime === 0){
-  //         let tbody = document.createElement("tbody");
-  //         document.getElementById("tableRR2").appendChild(tbody);
-
-  //         let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].ticketRR + '</td>';
-  //         let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].nombre + '</td>';
-  //         let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].cc + '</td>';
-  //         let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].rafaga + '</td>';
-  //         let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].quantum + '</td>';
-  //         let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].hora + '</td>';
-  //         let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].fecha + '</td>';
-
-  //         tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
-          
-  //         rows[1].remove();
-  //         roundRobin.shift();
-  //         const toTable3 = async()=>{
-  //           console.log("Entro");
-  //           await wait(1000);
-  //         }
-  //         toTable3();
-  //       }else{
-  //         if(rafaga > quantum){
-            
-  //           let tbody = document.createElement("tbody");
-  //           document.getElementById("tableRR1").appendChild(tbody);
-
-  //           let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].ticketRR + '</td>';
-  //           let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].nombre + '</td>';
-  //           let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].cc + '</td>';
-  //           let td4 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].rafaga + '</td>';
-  //           let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].quantum + '</td>';
-  //           let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].hora + '</td>';
-  //           let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].fecha + '</td>';
-
-  //           tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
-  //           rows[1].remove();
-  //           roundRobin.push(roundRobin.shift());
-            
-  //         }else{
-  //           let tbody = document.createElement("tbody");
-  //           document.getElementById("tableRR2").appendChild(tbody);
-
-  //           let td1 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].ticketRR + '</td>';
-  //           let td2 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].nombre + '</td>';
-  //           let td3 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].cc + '</td>';
-  //           let td4 = document.createElement("td").innerHTML = '<td>' + 0 + '</td>';
-  //           let td5 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].quantum + '</td>';
-  //           let td6 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].hora + '</td>';
-  //           let td7 = document.createElement("td").innerHTML = '<td>' + roundRobin[0].fecha + '</td>';
-
-  //           tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5+td6+td7;
-  //           rows[1].remove();
-  //           roundRobin.shift();
-            
-  //         }
-  //       }
-  //     }else{
-  //       console.log("Completed!");
-  //       clearInterval(interval6);
-  //     }
-  //   },1000);
-
-    
-  // }
-  // asyncFunction();
 }
 
 
