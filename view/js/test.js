@@ -163,37 +163,35 @@ function simulateRR(){
   const asyncFunctionRR = async ()=>{
     var intervalRR = setInterval(()=>{
       let rowCpu = [];
-      let rowFinished = [];
       if (rows.length > 0){
-        let rafaga = parseInt(rows[0].cells[3].innerText);
-        let quantum = parseInt(rows[0].cells[4].innerText);
+        let rafaga = roundRobin[0].rafaga;
+        let quantum = roundRobin[0].quantum;
 
         let remainingTime = Math.abs(rafaga - quantum);
 
         rows[0].cells[3].innerText = remainingTime;
+        roundRobin[0].rafaga = remainingTime;
 
         //console.log(rows[1].cells[3].innerHTML);
 
         if(rafaga < quantum){
           //console.log(rows[1].cells)
           //rows[1].remove();
-          rowCpu.push(rows[0]);
           rows[0].remove();
           
           
-          //rowCpu[0] = roundRobin.shift();
-          //rowCpu[0].rafaga = 0;
-          //rowFinished.push(rowCpu[0]);
+          rowCpu[0] = roundRobin.shift();
+          rowCpu[0].rafaga = 0;
+          rowFinished.push(rowCpu[0]);
           
           sleep(500).then(() => {
             rows.shift();
-            putIntoTable2("tableRR2", rowCpu, Object.keys(roundRobin[0]));
+            putIntoTable("tableRR2", rowCpu, Object.keys(rowCpu[0]));
           });
 
           sleep(2000).then(() => {
             rowsTableCPU[1].remove();
-            rowFinished.push(rowCpu[0]);
-            putIntoTable2("tableRR3", rowFinished, Object.keys(roundRobin[0]));
+            putIntoTable("tableRR3", rowFinished, Object.keys(rowFinished[0]));
           });
         }else {
           
@@ -343,33 +341,6 @@ function putIntoTable(tableId, dataArray, labelsArray){
         let td = document.createElement("td").innerHTML = '<td>' + dataArray[i][labelsArray[j]] + '</td>';
         rowString += td;
       }
-    }
-    wholeRow.push(rowString);
-  }
-  
-  for (let i = 0; i < wholeRow.length; i++) {
-    tbody.insertRow(-1).innerHTML = wholeRow[i];
-  }
-}
-
-function putIntoTable2(tableId, rowsArray, labelsArray){
-  let wholeRow = [];
-  
-  if (document.getElementById(tableId).querySelector("tbody")) {
-    document.getElementById(tableId).querySelector("tbody").remove();
-  }
-
-  let tbody = document.createElement("tbody");
-
-  for (let i = 0; i < rowsArray.length; i++) {
-    if (i == 0) {
-      document.getElementById(tableId).appendChild(tbody);
-    }
-
-    let rowString = "";
-    for (let j = 0; j < labelsArray.length; j++) {
-      let td = document.createElement("td").innerHTML = '<td>' + rowsArray[i].cells[j].innerText + '</td>';
-      rowString += td;
     }
     wholeRow.push(rowString);
   }
