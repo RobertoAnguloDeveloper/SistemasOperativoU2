@@ -35,10 +35,12 @@ function limpiarCampos(campos){
 
 function simulateFifo(){
   buttons = ["btnCreateFifo","simulateFifo"];
+
   disabled(buttons, true);
+
   let rows = document.getElementById("tableListo").getElementsByTagName("tr");
   let rowsTableCPU = document.getElementById("tableCPU").getElementsByTagName("tr");
-  //let rowsTableTerminado = document.getElementById("tableTerminado").getElementsByTagName("tr");
+  
   let rowFinished = [];
 
   const asyncFunctionFifo = async ()=>{
@@ -59,117 +61,14 @@ function simulateFifo(){
           rowsTableCPU[1].remove();
           putIntoTable("tableTerminado", rowFinished, Object.keys(rowFinished[0]));
         });
-        
-        
+
       }else{
         disabled(buttons, false);
         clearInterval(intervalFF);
       }
     }, 3250);
   }
-
   asyncFunctionFifo();
-  
-
-  // let i = 0;
-  // let initialSize = rows.length-1;
-
-  // var interval = setInterval(()=>{
-  //   const promise = new Promise((resolve)=>{
-  //     setTimeout(()=>{
-  //       if(i < rows.length){
-  //         resolve();
-  //       }
-  //       resolve();
-  //     }, 2000);
-  //   });
-
-  //   promise.then(res=>{
-  //     if (i < initialSize-1){
-  //       let tbody = document.createElement("tbody");
-  //       document.getElementById("tableCPU").appendChild(tbody);
-
-  //       let td1 = document.createElement("td").innerHTML = '<td>' + fifo[0].ticket + '</td>';
-  //       let td2 = document.createElement("td").innerHTML = '<td>' + fifo[0].nombre + '</td>';
-  //       let td3 = document.createElement("td").innerHTML = '<td>' + fifo[0].cc + '</td>';
-  //       let td4 = document.createElement("td").innerHTML = '<td>' + fifo[0].hora + '</td>';
-  //       let td5 = document.createElement("td").innerHTML = '<td>' + fifo[0].fecha + '</td>';
-
-  //       tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5;
-        
-  //       rows[1].remove()
-  //       fifo.shift();
-  //       i++;
-
-  //       var interval2 = setInterval(()=>{
-  //         let promise2 = new Promise((resolve)=>{
-  //           setTimeout(()=>{
-  //             resolve();
-  //           }, 500);
-  //         });
-
-  //         promise2.then(res=>{
-  //           let rows2 = document.getElementById("tableCPU").getElementsByTagName("tr");
-
-  //           if(rows2.length > 1) {
-  //             let tbody2 = document.createElement("tbody");
-  //             document.getElementById("tableTerminado").appendChild(tbody2);
-
-  //             let tdx = document.createElement("td").innerHTML = rows2[1].innerHTML;
-
-  //             tbody2.insertRow(-1).innerHTML = tdx;
-  //             rows2[1].remove();
-  //             clearInterval(interval2);
-  //           }
-  //         });
-  //       },2000);
-
-  //     }else{
-  //       let tbody = document.createElement("tbody");
-  //       document.getElementById("tableCPU").appendChild(tbody);
-
-  //       let td1 = document.createElement("td").innerHTML = '<td>' + fifo[0].ticket + '</td>';
-  //       let td2 = document.createElement("td").innerHTML = '<td>' + fifo[0].nombre + '</td>';
-  //       let td3 = document.createElement("td").innerHTML = '<td>' + fifo[0].cc + '</td>';
-  //       let td4 = document.createElement("td").innerHTML = '<td>' + fifo[0].hora + '</td>';
-  //       let td5 = document.createElement("td").innerHTML = '<td>' + fifo[0].fecha + '</td>';
-
-  //       tbody.insertRow(-1).innerHTML = td1+td2+td3+td4+td5;
-
-  //       rows[1].remove()
-  //       fifo.shift();
-
-  //       var interval3 = setInterval(()=>{
-  //         let promise3 = new Promise((resolve)=>{
-  //           setTimeout(()=>{
-  //             resolve();
-  //           }, 1000);
-  //         });
-
-  //         promise3.then(res=>{
-  //           let rows2 = document.getElementById("tableCPU").getElementsByTagName("tr");
-  //           if(rows2.length > 1) {
-  //             let tbody2 = document.createElement("tbody");
-  //             document.getElementById("tableTerminado").appendChild(tbody2);
-
-  //             let tdx = document.createElement("td").innerHTML = rows2[1].innerHTML;
-
-  //             tbody2.insertRow(-1).innerHTML = tdx;
-  //             rows2[1].remove();
-
-  //             document.getElementById("btnCreateFifo").disabled = false;
-  //             document.getElementById("simulateFifo").disabled = false;
-
-  //             clearInterval(interval3);
-  //           }
-  //         });
-  //       },2500);
-        
-  //       clearInterval(interval);
-  //     }
-  //   });
-    
-  // }, 2500);
 }
 
 fifo = [{}];
@@ -216,19 +115,8 @@ roundRobin = [{}];
 roundRobin.shift();
 
 function simulateRR(){
-  
-  const wait = async ms => new Promise(resolve => setTimeout(resolve, ms));
-  // const asyncFunction = async ()=>{
-  //   console.log("1");
-  //   await wait(1000);
-  //   console.log("2");
-  //   await wait(1000);
-  //   console.log("3");
-  // }
-  // asyncFunction();
 
   const asyncFunction = async ()=>{
-    await wait(1000);
     var interval6 = setInterval(()=>{
       let rows = document.getElementById("tableRR1").getElementsByTagName("tr");
       if (rows.length > 1){
@@ -425,24 +313,4 @@ function putIntoTable(tableId, dataArray, labelsArray){
   for (let i = 0; i < wholeRow.length; i++) {
     tbody.insertRow(-1).innerHTML = wholeRow[i];
   }
-}
-
-function putIntoTableWithoutLabels(tableId, rowsArray){
-  if (document.getElementById(tableId).querySelector("tbody")) {
-    document.getElementById(tableId).querySelector("tbody").remove();
-  }
-  
-  let tbody = document.createElement("tbody");
-  document.getElementById(tableId).appendChild(tbody);
-  console.log(rowsArray);
-  tbody.insertRow(-1).innerHTML = rowsArray;
-
-  // for (let i = 1; i < rowsArray.length; i++) {
-  //   if (i == 1) {
-  //     document.getElementById(tableId).appendChild(tbody);
-  //   }
-  //   let tr = document.createElement("tr").innerHTML = rowsArray[i]
-  //   tbody.insertRow(-1).innerHTML = tr;
-  //   console.log(rowsArray[i]);
-  // }
 }
